@@ -1,0 +1,10 @@
+RewriteEngine On
+
+RewriteRule ^Inicio$                           index.php
+RewriteRule ^Usuario$                          index.php?c=admin&a=User
+RewriteRule ^Equipo$                           index.php?c=admin&a=Equipo
+RewriteRule ^Asignacion$                       index.php?c=admin&a=Asignacion
+RewriteRule ^Ver_usuarios$                     index.php?c=admin&a=ReadUser
+RewriteRule ^Ver_equipos$                      index.php?c=admin&a=ReadEqui
+RewriteRule ^Ver_asignaciones$                 index.php?c=admin&a=ReadAsig
+RewriteRule ^Ver_historial$                    index.php?c=admin&a=ReadHis
