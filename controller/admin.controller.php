@@ -51,7 +51,6 @@
       $data = $_POST["data"];
       $result = $this->model->CreateUser($data);
       header("Location: ?c=admin&a=User&msn=$result");
-      // print_r($data);
     }
 
     public function DeleteUser(){
@@ -175,6 +174,11 @@
       $result= $this->model->readSitebyAdmin();
       require_once 'view/modules/admin/adminSite.php';
       require_once 'view/include/footer.php';
+    }
+
+    public function CreateSite(){
+      $result= $$this->model->CreateSite();
+      header("Location: ?c=admin&a=AdminSite");
     }
 
     public function AdminArea(){

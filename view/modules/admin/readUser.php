@@ -12,6 +12,17 @@
           <li class="divider"></li>
           <li><a href="?c=admin&a=ReadHis">Historial</a></li>
         </ul>
+        <ul id="dropdown2" class="dropdown-content">
+          <li><a href="?c=admin&a=AdminSite">Site</a></li>
+          <li class="divider"></li>
+          <li><a href="?c=admin&a=AdminArea">Area</a></li>
+          <li class="divider"></li>
+          <li><a href="?c=admin&a=AdminCargo">Cargo</a></li>
+          <li class="divider"></li>
+          <li><a href="?c=admin&a=AdminTipo">Tipo</a></li>
+          <li class="divider"></li>
+          <li><a href="?c=admin&a=AdminMarca">Marca</a></li>
+        </ul>
         <div class="nav-wrapper blue darken-3">
           <a class="brand-logo right"><img src="../../../../S.R.P.C/view/assets/imagenes/Logo.png" alt="Logo Onelink"></a>
           <ul id="nav-mobile">
@@ -19,6 +30,7 @@
             <li><a href="?c=admin&a=User">Usuario</a></li>
             <li><a href="?c=admin&a=Equipo">Equipo</a></li>
             <li><a href="?c=admin&a=Asignacion">Asignación</a></li>
+            <li><a class="dropdown-button" data-activates="dropdown2">Admin listas<i class="material-icons right">arrow_drop_down</i></a></li>
           </ul>
         </div>
       </nav>
@@ -66,11 +78,11 @@
             <td><?php echo $row['vhur']; ?></td>
             <td><?php echo $row['nom']; ?></td>
             <td><?php echo $row['tel']; ?></td>
-            <td><?php echo $row['site']; ?></td>
-            <td><?php echo $row['area']; ?></td>
-            <td><?php echo $row['cargo']; ?></td>
+            <td><?php echo $row['nom_site']; ?></td>
+            <td><?php echo $row['nom_area']; ?></td>
+            <td><?php echo $row['nom_cargo']; ?></td>
             <td><?php echo $row['estado']; ?></td>
-            <td><a href="?detalle=<?php echo $row['ced'];?>&c=admin&a=DetalleUser" class="btn blue-grey darken-2 tooltiped" data-position="top" data-tooltip="Actualizar usuario"><i class="small material-icons">update</i></a></td>
+            <!-- <td><a href="?detalle=<?php echo $row['ced'];?>&c=admin&a=DetalleUser" class="btn blue-grey darken-2 tooltiped" data-position="top" data-tooltip="Actualizar usuario"><i class="small material-icons">update</i></a></td> -->
             <td><a href="?id=<?php echo $row['ced'];?>&c=admin&a=DeleteUser" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar usuario" onclick="confirmDelete()"><i class="small material-icons">delete</i></a></td>
           </tr>
         </tbody>
@@ -106,11 +118,11 @@
             <td><?php echo $data->vhur; ?></td>
             <td><?php echo $data->nom; ?></td>
             <td><?php echo $data->tel; ?></td>
-            <td><?php echo $data->site; ?></td>
-            <td><?php echo $data->area; ?></td>
-            <td><?php echo $data->cargo; ?></td>
+            <td><?php echo $data->nom_site; ?></td>
+            <td><?php echo $data->nom_area; ?></td>
+            <td><?php echo $data->nom_cargo; ?></td>
             <td><?php echo $data->estado; ?></td>
-            <td><a href="?detalle=<?php echo $data->ced?>&c=admin&a=DetalleUser" class="btn blue-grey darken-2 tooltiped" data-position="top" data-tooltip="Actualizar usuario"><i class="small material-icons">update</i></a></td>
+            <!-- <td><a href="?detalle=<?php echo $data->ced?>&c=admin&a=DetalleUser" class="btn blue-grey darken-2 tooltiped" data-position="top" data-tooltip="Actualizar usuario"><i class="small material-icons">update</i></a></td> -->
             <td><a onclick="return confirm('¿Desea eliminar el usuario permanentemente?')" href="?id=<?php echo $data->ced?>&c=admin&a=DeleteUser" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar usuario"><i class="small material-icons">delete</i></a></td>
           </tr>
         </tbody>

@@ -12,6 +12,17 @@
           <li class="divider"></li>
           <li><a href="?c=admin&a=ReadHis">Historial</a></li>
         </ul>
+        <ul id="dropdown2" class="dropdown-content">
+          <li><a href="?c=admin&a=AdminSite">Site</a></li>
+          <li class="divider"></li>
+          <li><a href="?c=admin&a=AdminArea">Area</a></li>
+          <li class="divider"></li>
+          <li><a href="?c=admin&a=AdminCargo">Cargo</a></li>
+          <li class="divider"></li>
+          <li><a href="?c=admin&a=AdminTipo">Tipo</a></li>
+          <li class="divider"></li>
+          <li><a href="?c=admin&a=AdminMarca">Marca</a></li>
+        </ul>
         <div class="nav-wrapper blue darken-3">
           <a class="brand-logo right"><img src="../../../../S.R.P.C/view/assets/imagenes/Logo.png" alt="Logo Onelink"></a>
           <ul id="nav-movile">
@@ -19,6 +30,7 @@
             <li><a href="?c=admin&a=User">Usuario</a></li>
             <li><a href="?c=admin&a=Equipo">Equipo</a></li>
             <li><a href="?c=admin&a=Asignacion">Asignación</a></li>
+            <li><a class="dropdown-button" data-activates="dropdown2">Admin listas<i class="material-icons right">arrow_drop_down</i></a></li>
           </ul>
         </div>
       </nav>
@@ -47,7 +59,6 @@
           <tr id="tabla">
             <th>N° asignación</th>
             <th>Fecha de asignación</th>
-            <th>Tipo</th>
             <th>Serial</th>
             <th>DUI</th>
             <th>Acción</th>
@@ -58,7 +69,6 @@
           <tr>
             <td><?php echo $row['no_asig']; ?></td>
             <td><?php $date = new DateTime($row['fec_asig']); echo $date->format('d-m-Y'); ?></td>
-            <td><?php echo $row['tipo_asig']; ?></td>
             <td><?php echo $row['ser']; ?></td>
             <td><?php echo $row['ced']; ?></td>
             <td><a href="?Devolucion=<?php echo $row['ser'];?>&c=admin&a=ReadDev" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Devolucion de equipo"><i class="small material-icons">compare_arrows</i></a></td>
@@ -79,7 +89,6 @@
           <tr id="tabla">
             <th>N° asignación</th>
             <th>Fecha de asignación</th>
-            <th>Tipo</th>
             <th>Serial</th>
             <th>DUI</th>
             <th>Acción</th>
@@ -90,7 +99,6 @@
             <tr>
               <td><?php echo $data->no_asig ?></td>
               <td><?php $date = new DateTime($data->fec_asig); echo $date->format('d-m-Y') ; ?></td>
-              <td><?php echo $data->tipo_asig; ?></td>
               <td><?php echo $data->ser; ?></td>
               <td><?php echo $data->ced; ?></td>
               <td><a href="?Devolucion=<?php echo $data->ser?>&c=admin&a=ReadDev" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Devolucion de equipo"><i class="small material-icons">compare_arrows</i></a></td>

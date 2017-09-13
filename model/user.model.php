@@ -22,7 +22,7 @@
 
     public function searchUser($data){
     try{
-      $sql="SELECT * FROM usuario WHERE  ced LIKE ? OR vhur LIKE ?";
+      $sql="SELECT * FROM usuario INNER JOIN usu_site ON usuario.no_site = usu_site.no_site INNER JOIN usu_area ON usuario.no_area = usu_area.no_area INNER JOIN usu_cargo ON usuario.no_cargo = usu_cargo.no_cargo WHERE  ced LIKE ? OR vhur LIKE ?";
       $query = $this->pdo->prepare($sql);
       $query->execute(array("%$data%","%$data%"));
       $data = $query->fetchAll(PDO::FETCH_BOTH);
@@ -73,7 +73,7 @@
 
     public function ReadUser(){
       try {
-        $sql = "SELECT * FROM usuario ORDER BY nom";
+        $sql = "SELECT * FROM usuario INNER JOIN usu_site ON usuario.no_site = usu_site.no_site INNER JOIN usu_area ON usuario.no_area = usu_area.no_area INNER JOIN usu_cargo ON usuario.no_cargo = usu_cargo.no_cargo ORDER BY nom";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $result = $query->fetchALL(PDO::FETCH_OBJ);
@@ -89,7 +89,7 @@
     public function DetalleUser($detalle){
       try {
 
-        $sql= "SELECT * FROM usuario WHERE ced= '$detalle'";
+        $sql= "SELECT * FROM usuario INNER JOIN usu_site ON usuario.no_site = usu_site.no_site INNER JOIN usu_area ON usuario.no_area = usu_area.no_area INNER JOIN usu_cargo ON usuario.no_cargo = usu_cargo.no_cargo WHERE ced= '$detalle'";
         $query= $this->pdo->prepare($sql);
         $query->execute();
         $result= $query->fetchALL(PDO::FETCH_OBJ);
@@ -102,19 +102,19 @@
 
     //Función para actualizar usuarios en los campos modificados.
 
-    public function UpdateUser($data){
-      try {
-        $sql = "UPDATE usuario SET vhur= '$data[1]', nom= '$data[2]', tel= '$data[3]', site= '$data[4]', area= '$data[5]', cargo= '$data[6]' WHERE ced= :numero_user";
-        $query = $this->pdo->prepare($sql);
-        $query->bindValue(":numero_user",$data[0]);
-        $query->execute();
-        $msn = "El usuario se ha actualizado correctamente";
-
-      }catch(PDOException $e){
-        die ($e->getMessage());
-      }
-      return $msn;
-    }
+    // public function UpdateUser($data){
+    //   try {
+    //     $sql = "UPDATE usuario INNER JOIN usu_site ON usuario.no_site = usu_site.no_site INNER JOIN usu_area ON usuario.no_area = usu_area.no_area INNER JOIN usu_cargo ON usuario.no_cargo = usu_cargo.no_cargo SET vhur= '$data[1]', nom= '$data[2]', tel= '$data[3]', nom_site= '$data[4]', nom_area= '$data[5]', nom_cargo= '$data[6]' WHERE ced= :numero_user";
+    //     $query = $this->pdo->prepare($sql);
+    //     $query->bindValue(":numero_user",$data[0]);
+    //     $query->execute();
+    //     $msn = "El usuario se ha actualizado correctamente";
+    //
+    //   }catch(PDOException $e){
+    //     die ($e->getMessage());
+    //   }
+    //   return $msn;
+    // }
 
     //Función para eliminar un usuario del sistema.
 
@@ -173,6 +173,19 @@
       return $result;
     }
 
+  public function CreateSite(){
+    try {
+      $sql= "INSERT INTO usu_site VALUES('',?)";
+      $query= $this->pdo->prepare($sql);
+      $query->execute(array($data[0]));
+      $msn= "El site fue guardado exitosamente";
+
+    }catch(PDOException $e){
+      die($e->getMessage());
+    }
+    return $msn;
+  }
+
     //Trae los datos del select del area
 
     public function readArea(){
@@ -211,7 +224,7 @@
 
     public function SearchEqui($data){
       try {
-        $sql= "SELECT * FROM equipo WHERE ser LIKE ? OR hostname LIKE ? OR estado LIKE ?";
+        $sql= "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo WHERE ser LIKE ? OR hostname LIKE ? OR estado LIKE ?";
         $query = $this->pdo->prepare($sql);
         $query->execute(array("%$data%","%$data%","%$data%"));
         $data= $query->fetchALL(PDO::FETCH_BOTH);
@@ -253,7 +266,7 @@
 
     public function ReadEqui(){
       try {
-        $sql = "SELECT * FROM equipo";
+        $sql = "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $result = $query->fetchALL(PDO::FETCH_OBJ);
@@ -269,7 +282,7 @@
     public function DetalleEqui($detalle){
       try {
 
-        $sql= "SELECT * FROM equipo WHERE ser= '$detalle'";
+        $sql= "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo INNER JOIN equi_marca ON equipo.no_marca = equi_marca.no_marca WHERE ser= '$detalle'";
         $query= $this->pdo->prepare($sql);
         $query->execute();
         $result= $query->fetchALL(PDO::FETCH_OBJ);
@@ -284,7 +297,7 @@
 
     public function UpdateEqui($data){
       try {
-        $sql = "UPDATE equipo SET tipo= '$data[1]', marca= '$data[2]', model= '$data[3]', memo= '$data[4]', disc_duro= '$data[5]', procesador= '$data[6]', sis_operativo= '$data[7]', type= '$data[8]', cons_inventario= '$data[9]', hostname= '$data[10]', adicional= '$data[11]' WHERE ser= :numero_equi";
+        $sql = "UPDATE equipo SET model= '$data[3]', memo= '$data[4]', disc_duro= '$data[5]', procesador= '$data[6]', sis_operativo= '$data[7]', type= '$data[8]', cons_inventario= '$data[9]', hostname= '$data[10]', adicional= '$data[11]' WHERE ser= :numero_equi";
         $query = $this->pdo->prepare($sql);
         $query->bindValue(":numero_equi",$data[0]);
         $query->execute();
@@ -390,22 +403,22 @@
 
     public function CreateAsig($data){
       try{
-        $sql = "SELECT * FROM portatil WHERE ser = '$data[2]' AND estado = 'Asignado'";
+        $sql = "SELECT * FROM equipo WHERE ser = '$data[1]' AND estado = 'Asignado'";
         $query = $this->pdo->prepare($sql);
         $query-> execute();
         $numero_asig = $query->rowCount();
 
-        $sql = "SELECT * FROM usuario WHERE ced = '$data[3]' AND estado = 'Asignado'";
+        $sql = "SELECT * FROM usuario WHERE ced = '$data[2]' AND estado = 'Asignado'";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $numero_usu = $query->rowCount();
 
-        $sql = "SELECT * FROM portatil WHERE ser = '$data[2]'";
+        $sql = "SELECT * FROM equipo WHERE ser = '$data[1]'";
         $query = $this->pdo->prepare($sql);
         $query-> execute();
         $num_asig = $query->rowCount();
 
-        $sql = "SELECT * FROM usuario WHERE ced = '$data[3]'";
+        $sql = "SELECT * FROM usuario WHERE ced = '$data[2]'";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $num_usu = $query->rowCount();
@@ -430,12 +443,12 @@
                 return $msn;
                 }else{
 
-                    $sql = "INSERT INTO asignacion VALUES('',?,?,?,?)";
+                    $sql = "INSERT INTO asignacion VALUES('',?,?,?)";
                     $query = $this->pdo->prepare($sql);
                     $query->execute(array($data[0],$data[1],$data[2],$data[3]));
                     $msn = "La asignacion fue guardada exitosamente";
 
-                    $sql = "UPDATE portatil SET estado = 'Asignado' WHERE ser = '$data[2]'";
+                    $sql = "UPDATE equipo SET estado = 'Asignado' WHERE ser = '$data[2]'";
                     $query = $this->pdo->prepare($sql);
                     $query->execute();
 
@@ -491,10 +504,10 @@
       try {
         $sql = "DELETE FROM asignacion WHERE no_asig = :numero_asig";
         $query = $this->pdo->prepare($sql);
-        $query->bindValue(":numero_asig",$data[5]);
+        $query->bindValue(":numero_asig",$data[4]);
         $query->execute();
 
-        $sql = "UPDATE portatil SET estado = 'Sin asignacion' WHERE ser = '$data[3]'";
+        $sql = "UPDATE equipo SET estado = 'Sin asignacion' WHERE ser = '$data[3]'";
         $query = $this->pdo->prepare($sql);
         $query->execute();
 
@@ -504,7 +517,7 @@
 
         $sql = "INSERT INTO devolucion VALUES ('',?,?,?,?,?,?)";
         $query = $this->pdo->prepare($sql);
-        $query->execute(array($data[0],$data[1],$data[2],$data[3],$data[4],$data[5]));
+        $query->execute(array($data[0],$data[1],$data[2],$data[3],$data[4]));
         $msn = "El equipo ha sido devuelto";
 
       }catch(PDOException $e) {
