@@ -61,21 +61,21 @@
         </div>
 
         <div class="input-field col s4">
-          <select name="data[]" selected="<?php $data->no_site; ?>">
+          <select name="data[]" required>
             <option disabled selected>Seleccione el site</option>
             <?php $this->load->LoadSite();?>
           </select>
         </div>
 
         <div class="input-field col s4 offset-s2">
-          <select name="data[]">
+          <select name="data[]" required>
             <option disabled selected>Seleccione el area</option>
             <?php $this->load->LoadArea(); ?>
           </select>
         </div>
 
         <div class="input-field col s4">
-          <select name="data[]">
+          <select name="data[]" required>
             <option disabled selected>Seleccion el cargo</option>
             <?php $this->load->LoadCargo(); ?>
           </select>

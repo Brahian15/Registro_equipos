@@ -41,17 +41,17 @@
       <?php foreach($result as $data){ ?>
 
       <div class="input-field col s4 offset-s2">
-        <input type="text" name="data[]" value="<?php echo $data->ser; ?>" disabled>
+        <input type="text" name="data[]" value="<?php echo $data->ser; ?>">
         <label>Serial</label>
       </div>
 
       <div class="input-field col s4">
-        <input type="text" name="data[]" value="<?php echo $data->nom_tipo; ?>" disabled>
+        <input type="text" name="data[]" value="<?php echo $data->nom_tipo; ?>">
         <label>Elige el tipo</label>
       </div>
 
       <div class="input-field col s4 offset-s2">
-        <input type="text" name="data[]" value="<?php echo $data->nom_marca; ?>" disabled>
+        <input type="text" name="data[]" value="<?php echo $data->nom_marca; ?>">
         <label>Marca</label>
       </div>
 

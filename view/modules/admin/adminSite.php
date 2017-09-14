@@ -36,18 +36,6 @@
 
     <h3>Sección de site del usuario</h3>
 
-    <?php foreach($result as $data){ ?>
-
-      <div class="input-field col s8 offset-s2">
-        <input type="text" name="data[]" value="<?php echo $data->nom_site;?>">
-      </div>
-
-      <a id="btn" href="#" class="btn col s4 offset-s2 blue-grey darken-2 tooltiped" data-position="left" data-tooltip="Actualizar"><i class="small material-icons">update</i></a>
-
-      <a href="#" class="btn col s4 blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar"><i class="small material-icons">delete</i></a>
-
-    <?php } ?>
-
     <div class="input-field col s8 offset-s2">
       <input type="text" name="data[]" value="">
       <label>Nuevo site</label>
@@ -55,6 +43,17 @@
 
     <a id="btn" href="?c=admin&a=CreateSite" class="btn input-field col s4 offset-s2 blue darken-3">Guardar</a>
     <a href="index.php" class="btn input-field col s4 blue-grey darken-2">Cancelar</a>
+
+    <?php foreach($result as $data){ ?>
+
+      <div class="input-field col s8 offset-s2">
+        <input type="text" name="data[]" value="<?php echo $data->nom_site;?>">
+        <label>Nombre del site</label>
+      </div>
+
+      <a id="btn" href="?id=<?php echo $data->no_site; ?>&c=admin&a=DeleteSite" class="btn col s8 offset-s2 blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar"><i class="small material-icons">delete</i></a>
+
+    <?php } ?>
 
   </div>
 </div>

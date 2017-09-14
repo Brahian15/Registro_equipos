@@ -82,7 +82,7 @@
             <td><?php echo $row['nom_area']; ?></td>
             <td><?php echo $row['nom_cargo']; ?></td>
             <td><?php echo $row['estado']; ?></td>
-            <!-- <td><a href="?detalle=<?php echo $row['ced'];?>&c=admin&a=DetalleUser" class="btn blue-grey darken-2 tooltiped" data-position="top" data-tooltip="Actualizar usuario"><i class="small material-icons">update</i></a></td> -->
+            <td><a href="?detalle=<?php echo $row['ced'];?>&c=admin&a=DetalleUser" class="btn blue-grey darken-2 tooltiped" data-position="top" data-tooltip="Actualizar usuario"><i class="small material-icons">update</i></a></td>
             <td><a href="?id=<?php echo $row['ced'];?>&c=admin&a=DeleteUser" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar usuario" onclick="confirmDelete()"><i class="small material-icons">delete</i></a></td>
           </tr>
         </tbody>
@@ -122,7 +122,7 @@
             <td><?php echo $data->nom_area; ?></td>
             <td><?php echo $data->nom_cargo; ?></td>
             <td><?php echo $data->estado; ?></td>
-            <!-- <td><a href="?detalle=<?php echo $data->ced?>&c=admin&a=DetalleUser" class="btn blue-grey darken-2 tooltiped" data-position="top" data-tooltip="Actualizar usuario"><i class="small material-icons">update</i></a></td> -->
+            <td><a href="?detalle=<?php echo $data->ced?>&c=admin&a=DetalleUser" class="btn blue-grey darken-2 tooltiped" data-position="top" data-tooltip="Actualizar usuario"><i class="small material-icons">update</i></a></td>
             <td><a onclick="return confirm('¿Desea eliminar el usuario permanentemente?')" href="?id=<?php echo $data->ced?>&c=admin&a=DeleteUser" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar usuario"><i class="small material-icons">delete</i></a></td>
           </tr>
         </tbody>

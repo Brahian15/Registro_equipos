@@ -177,8 +177,15 @@
     }
 
     public function CreateSite(){
-      $result= $$this->model->CreateSite();
+      $data= $_POST['data'];
+      $result= $this->model->CreateSite($data);
       header("Location: ?c=admin&a=AdminSite");
+    }
+
+    public function DeleteSite(){
+      $id= $_GET['id'];
+      $result= $this->model->DeleteSite($id);
+      header("Location: ?c=admin&a=AdminSite&msn=$result");
     }
 
     public function AdminArea(){

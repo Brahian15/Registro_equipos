@@ -102,19 +102,19 @@
 
     //Función para actualizar usuarios en los campos modificados.
 
-    // public function UpdateUser($data){
-    //   try {
-    //     $sql = "UPDATE usuario INNER JOIN usu_site ON usuario.no_site = usu_site.no_site INNER JOIN usu_area ON usuario.no_area = usu_area.no_area INNER JOIN usu_cargo ON usuario.no_cargo = usu_cargo.no_cargo SET vhur= '$data[1]', nom= '$data[2]', tel= '$data[3]', nom_site= '$data[4]', nom_area= '$data[5]', nom_cargo= '$data[6]' WHERE ced= :numero_user";
-    //     $query = $this->pdo->prepare($sql);
-    //     $query->bindValue(":numero_user",$data[0]);
-    //     $query->execute();
-    //     $msn = "El usuario se ha actualizado correctamente";
-    //
-    //   }catch(PDOException $e){
-    //     die ($e->getMessage());
-    //   }
-    //   return $msn;
-    // }
+    public function UpdateUser($data){
+      try {
+        $sql = "UPDATE usuario SET vhur= '$data[1]', nom= '$data[2]', tel= '$data[3]', no_site= '$data[4]', no_area= '$data[5]', no_cargo= '$data[6]' WHERE ced= :numero_user";
+        $query = $this->pdo->prepare($sql);
+        $query->bindValue(":numero_user",$data[0]);
+        $query->execute();
+        $msn = "El usuario se ha actualizado correctamente";
+
+      }catch(PDOException $e){
+        die ($e->getMessage());
+      }
+      return $msn;
+    }
 
     //Función para eliminar un usuario del sistema.
 
@@ -173,11 +173,11 @@
       return $result;
     }
 
-  public function CreateSite(){
+  public function CreateSite($data){
     try {
       $sql= "INSERT INTO usu_site VALUES('',?)";
       $query= $this->pdo->prepare($sql);
-      $query->execute(array($data[0]));
+      $query->execute(array($data[1]));
       $msn= "El site fue guardado exitosamente";
 
     }catch(PDOException $e){
@@ -185,6 +185,31 @@
     }
     return $msn;
   }
+
+    public function DeleteSite($id){
+      $sql= "SELECT * FROM usuario WHERE no_site='$id'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $id_site= $query->rowCount();
+
+      if($id_site==true){
+        $msn= "No se puede eliminar el site ya que cuenta con usuarios asignados";
+
+        return $msn;
+      }else{
+
+        try {
+          $sql= "DELETE FROM usu_site WHERE no_site='$id'";
+          $query= $this->pdo->prepare($sql);
+          $query->execute();
+          $msn= "El site se eliminó correctamente";
+
+        }catch(PDOException $e){
+          die($e->getMessage());
+        }
+        return $msn;
+      }
+    }
 
     //Trae los datos del select del area
 
@@ -445,14 +470,14 @@
 
                     $sql = "INSERT INTO asignacion VALUES('',?,?,?)";
                     $query = $this->pdo->prepare($sql);
-                    $query->execute(array($data[0],$data[1],$data[2],$data[3]));
+                    $query->execute(array($data[0],$data[1],$data[2]));
                     $msn = "La asignacion fue guardada exitosamente";
 
-                    $sql = "UPDATE equipo SET estado = 'Asignado' WHERE ser = '$data[2]'";
+                    $sql = "UPDATE equipo SET estado = 'Asignado' WHERE ser = '$data[1]'";
                     $query = $this->pdo->prepare($sql);
                     $query->execute();
 
-                    $sql = "UPDATE usuario SET estado= 'Asignado' WHERE ced= '$data[3]'";
+                    $sql = "UPDATE usuario SET estado= 'Asignado' WHERE ced= '$data[2]'";
                     $query= $this->pdo->prepare($sql);
                     $query->execute();
                     }
@@ -507,15 +532,15 @@
         $query->bindValue(":numero_asig",$data[4]);
         $query->execute();
 
-        $sql = "UPDATE equipo SET estado = 'Sin asignacion' WHERE ser = '$data[3]'";
+        $sql = "UPDATE equipo SET estado = 'Sin asignacion' WHERE ser = '$data[2]'";
         $query = $this->pdo->prepare($sql);
         $query->execute();
 
-        $sql = "UPDATE usuario SET estado = 'Sin asignacion' WHERE ced = '$data[4]'";
+        $sql = "UPDATE usuario SET estado = 'Sin asignacion' WHERE ced = '$data[3]'";
         $query = $this->pdo->prepare($sql);
         $query->execute();
 
-        $sql = "INSERT INTO devolucion VALUES ('',?,?,?,?,?,?)";
+        $sql = "INSERT INTO devolucion VALUES ('',?,?,?,?,?)";
         $query = $this->pdo->prepare($sql);
         $query->execute(array($data[0],$data[1],$data[2],$data[3],$data[4]));
         $msn = "El equipo ha sido devuelto";
