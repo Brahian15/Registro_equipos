@@ -22,7 +22,7 @@
 
     public function searchUser($data){
     try{
-      $sql="SELECT * FROM usuario WHERE  ced LIKE ? OR vhur LIKE ?";
+      $sql="SELECT * FROM usuario INNER JOIN usu_site ON usuario.no_site = usu_site.no_site INNER JOIN usu_area ON usuario.no_area = usu_area.no_area INNER JOIN usu_cargo ON usuario.no_cargo = usu_cargo.no_cargo WHERE  ced LIKE ? OR vhur LIKE ?";
       $query = $this->pdo->prepare($sql);
       $query->execute(array("%$data%","%$data%"));
       $data = $query->fetchAll(PDO::FETCH_BOTH);
@@ -73,7 +73,7 @@
 
     public function ReadUser(){
       try {
-        $sql = "SELECT * FROM usuario ORDER BY nom";
+        $sql = "SELECT * FROM usuario INNER JOIN usu_site ON usuario.no_site = usu_site.no_site INNER JOIN usu_area ON usuario.no_area = usu_area.no_area INNER JOIN usu_cargo ON usuario.no_cargo = usu_cargo.no_cargo ORDER BY nom";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $result = $query->fetchALL(PDO::FETCH_OBJ);
@@ -89,7 +89,7 @@
     public function DetalleUser($detalle){
       try {
 
-        $sql= "SELECT * FROM usuario WHERE ced= '$detalle'";
+        $sql= "SELECT * FROM usuario INNER JOIN usu_site ON usuario.no_site = usu_site.no_site INNER JOIN usu_area ON usuario.no_area = usu_area.no_area INNER JOIN usu_cargo ON usuario.no_cargo = usu_cargo.no_cargo WHERE ced= '$detalle'";
         $query= $this->pdo->prepare($sql);
         $query->execute();
         $result= $query->fetchALL(PDO::FETCH_OBJ);
@@ -104,7 +104,7 @@
 
     public function UpdateUser($data){
       try {
-        $sql = "UPDATE usuario SET vhur= '$data[1]', nom= '$data[2]', tel= '$data[3]', site= '$data[4]', area= '$data[5]', cargo= '$data[6]' WHERE ced= :numero_user";
+        $sql = "UPDATE usuario SET vhur= '$data[1]', nom= '$data[2]', tel= '$data[3]', no_site= '$data[4]', no_area= '$data[5]', no_cargo= '$data[6]' WHERE ced= :numero_user";
         $query = $this->pdo->prepare($sql);
         $query->bindValue(":numero_user",$data[0]);
         $query->execute();
@@ -145,9 +145,9 @@
         }
       }
 
-    //Trae los datos del select del site
+    //Trae los datos del select del site al formulario user
 
-    public function readSitebyUser(){
+    public function ReadSitebyUser(){
       try {
         $sql= "SELECT * FROM usu_site";
         $query= $this->pdo->prepare($sql);
@@ -160,7 +160,9 @@
       return $result;
     }
 
-    public function readSitebyAdmin(){
+    //Trae los datos del select del site al formulario adminSite
+
+    public function ReadSitebyAdmin(){
       try {
         $sql= "SELECT * FROM usu_site";
         $query= $this->pdo->prepare($sql);
@@ -173,9 +175,51 @@
       return $result;
     }
 
+    //Guarda nuevos sites en la base de datos
+
+    public function CreateSite($data){
+      try {
+        $sql= "INSERT INTO usu_site VALUES('',?)";
+        $query= $this->pdo->prepare($sql);
+        $query->execute(array($data[0]));
+        $msn= "El site fue guardado exitosamente";
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $msn;
+    }
+
+    //Elimina los sites de la base de datos
+
+    public function DeleteSite($id){
+      $sql= "SELECT * FROM usuario WHERE no_site='$id'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $id_site= $query->rowCount();
+
+      if($id_site==true){
+        $msn= "No se puede eliminar el site ya que cuenta con usuarios asignados";
+
+        return $msn;
+      }else{
+
+        try {
+          $sql= "DELETE FROM usu_site WHERE no_site='$id'";
+          $query= $this->pdo->prepare($sql);
+          $query->execute();
+          $msn= "El site se eliminó correctamente";
+
+        }catch(PDOException $e){
+          die($e->getMessage());
+        }
+        return $msn;
+      }
+    }
+
     //Trae los datos del select del area
 
-    public function readArea(){
+    public function ReadAreabyUser(){
       try {
         $sql= "SELECT * FROM usu_area";
         $query= $this->pdo->prepare($sql);
@@ -188,9 +232,65 @@
       return $result;
     }
 
+    //Trae los datos del select al formulario de adminArea
+
+    public function ReadAreabyAdmin(){
+      try {
+        $sql= "SELECT * FROM usu_area";
+        $query= $this->pdo->prepare($sql);
+        $query->execute();
+        $result= $query->fetchAll(PDO::FETCH_OBJ);
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $result;
+    }
+
+    //Crea nuevas areas en la base de datos
+
+    public function CreateArea($data){
+      try {
+        $sql= "INSERT INTO usu_area VALUES('',?)";
+        $query= $this->pdo->prepare($sql);
+        $query->execute(array($data[0]));
+        $msn= "El area fue guardada exitosamente";
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $msn;
+    }
+
+    //Elimina el area de la base de datos
+
+    public function DeleteArea($id){
+      $sql= "SELECT * FROM usuario WHERE no_area='$id'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $id_area= $query->rowCount();
+
+      if ($id_area==true) {
+        $msn= "No se puede eliminar el site ya que cuenta con usuarios asignados";
+
+        return $msn;
+      }else{
+
+        try {
+          $sql= "DELETE FROM usu_area WHERE no_area='$id'";
+          $query= $this->pdo->prepare($sql);
+          $query->execute();
+          $msn= "El area se eliminó correctamente";
+        }catch(PDOException $e){
+          die($e->getMessage());
+        }
+        return $msn;
+      }
+    }
+
     //Trae los datos del select del cargo
 
-    public function readCargo(){
+    public function ReadCargobyUser(){
       try {
         $sql= "SELECT * FROM usu_cargo";
         $query= $this->pdo->prepare($sql);
@@ -203,6 +303,62 @@
       return $result;
     }
 
+    //Trae los datos del select al formulario adminCargo
+
+    public function ReadCargobyAdmin(){
+      try {
+        $sql= "SELECT * FROM usu_cargo";
+        $query= $this->pdo->prepare($sql);
+        $query->execute();
+        $result= $query->fetchALL(PDO::FETCH_OBJ);
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $result;
+    }
+
+    //Guarda un nuevo cargo en la base de datos
+
+    public function CreateCargo($data){
+      try {
+        $sql= "INSERT INTO usu_cargo VALUES('',?)";
+        $query= $this->pdo->prepare($sql);
+        $query->execute(array($data[0]));
+        $msn= "El cargo fue creado exitosamente";
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $msn;
+    }
+
+    //Elimina los cargos de la base de datos
+
+    public function DeleteCargo($id){
+      $sql= "SELECT * FROM usuario WHERE no_cargo='$id'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $id_cargo= $query->rowCount();
+
+      if ($id_cargo==true){
+        $msn= "No se puede eliminar el cargo ya que cuenta con usuarios asignados";
+
+        return $msn;
+      }else{
+        try {
+          $sql= "DELETE FROM usu_cargo WHERE no_cargo='$id'";
+          $query= $this->pdo->prepare($sql);
+          $query->execute();
+          $msn= "El cargo se eliminó correctamente";
+
+        }catch(PDOException $e){
+          die($e->getMessage());
+        }
+        return $msn;
+      }
+    }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // CRUD Equipo
@@ -211,7 +367,7 @@
 
     public function SearchEqui($data){
       try {
-        $sql= "SELECT * FROM equipo WHERE ser LIKE ? OR hostname LIKE ? OR estado LIKE ?";
+        $sql= "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo WHERE ser LIKE ? OR hostname LIKE ? OR estado LIKE ?";
         $query = $this->pdo->prepare($sql);
         $query->execute(array("%$data%","%$data%","%$data%"));
         $data= $query->fetchALL(PDO::FETCH_BOTH);
@@ -253,7 +409,7 @@
 
     public function ReadEqui(){
       try {
-        $sql = "SELECT * FROM equipo";
+        $sql = "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $result = $query->fetchALL(PDO::FETCH_OBJ);
@@ -269,7 +425,7 @@
     public function DetalleEqui($detalle){
       try {
 
-        $sql= "SELECT * FROM equipo WHERE ser= '$detalle'";
+        $sql= "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo INNER JOIN equi_marca ON equipo.no_marca = equi_marca.no_marca WHERE ser= '$detalle'";
         $query= $this->pdo->prepare($sql);
         $query->execute();
         $result= $query->fetchALL(PDO::FETCH_OBJ);
@@ -284,7 +440,7 @@
 
     public function UpdateEqui($data){
       try {
-        $sql = "UPDATE equipo SET tipo= '$data[1]', marca= '$data[2]', model= '$data[3]', memo= '$data[4]', disc_duro= '$data[5]', procesador= '$data[6]', sis_operativo= '$data[7]', type= '$data[8]', cons_inventario= '$data[9]', hostname= '$data[10]', adicional= '$data[11]' WHERE ser= :numero_equi";
+        $sql = "UPDATE equipo SET model= '$data[3]', memo= '$data[4]', disc_duro= '$data[5]', procesador= '$data[6]', sis_operativo= '$data[7]', type= '$data[8]', cons_inventario= '$data[9]', hostname= '$data[10]', adicional= '$data[11]' WHERE ser= :numero_equi";
         $query = $this->pdo->prepare($sql);
         $query->bindValue(":numero_equi",$data[0]);
         $query->execute();
@@ -326,7 +482,7 @@
 
     //Trae los datos del select de tipo
 
-    public function readTipo(){
+    public function ReadTipobyEqui(){
       try {
         $sql= "SELECT * FROM equi_tipo";
         $query= $this->pdo->prepare($sql);
@@ -339,9 +495,65 @@
       return $result;
     }
 
+    //Trae los datos del select al formulario adminTipo
+
+    public function ReadTipobyAdmin(){
+      try {
+        $sql= "SELECT * FROM equi_tipo";
+        $query= $this->pdo->prepare($sql);
+        $query->execute();
+        $result= $query->fetchAll(PDO::FETCH_OBJ);
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $result;
+    }
+
+    //Guarda nuevos tipos a la base de datos
+
+    public function CreateTipo($data){
+      try {
+        $sql= "INSERT INTO equi_tipo VALUES('',?)";
+        $query= $this->pdo->prepare($sql);
+        $query->execute(array($data[0]));
+        $msn= "El tipo fue creado exitosamente";
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $msn;
+    }
+
+    //Elimina los tipos de la base de datos
+
+    public function DeleteTipo($id){
+      $sql= "SELECT * FROM equipo WHERE no_tipo='$id'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $id_tipo= $query->rowCount();
+
+      if ($id_tipo==true){
+        $msn= "No se puede eliminar el tipo ya que cuenta con un equipo asignado";
+
+        return $msn;
+      }else{
+        try {
+          $sql= "DELETE FROM equi_tipo WHERE no_tipo='$id'";
+          $query= $this->pdo->prepare($sql);
+          $query->execute();
+          $msn= "El tipo se eliminó exitosamente";
+
+        }catch(PDOException $e){
+          die($e->getMessage());
+        }
+        return $msn;
+      }
+    }
+
     //Trae los datos del select de marca
 
-    public function readMarca(){
+    public function ReadMarcabyEqui(){
       try {
         $sql= "SELECT * FROM equi_marca";
         $query= $this->pdo->prepare($sql);
@@ -352,6 +564,62 @@
         die($e->getMessage());
       }
       return $result;
+    }
+
+    //Trae los datos del select al formulario adminMarca
+
+    public function ReadMarcabyAdmin(){
+      try {
+        $sql= "SELECT * FROM equi_marca";
+        $query= $this->pdo->prepare($sql);
+        $query->execute();
+        $result= $query->fetchAll(PDO::FETCH_OBJ);
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $result;
+    }
+
+    //Guarda una nueva marca en la base de datos
+
+    public function CreateMarca($data){
+      try {
+        $sql= "INSERT INTO equi_marca VALUES('',?)";
+        $query= $this->pdo->prepare($sql);
+        $query->execute(array($data[0]));
+        $msn= "La marca se registró exitosamente";
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $msn;
+    }
+
+    //Elimina las marcas de la base de datos
+
+    public function DeleteMarca($id){
+      $sql= "SELECT * FROM equipo WHERE no_marca='$id'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $id_marca= $query->rowCount();
+
+      if ($id_marca==true){
+        $msn= "No se puede eliminar la marca ya que cuenta con equipos asignados";
+
+        return $msn;
+      }else{
+        try {
+          $sql= "DELETE FROM equi_marca WHERE no_marca='$id'";
+          $query= $this->pdo->prepare($sql);
+          $query->execute();
+          $msn= "La marca se eliminó correctamente";
+
+        }catch(PDOException $e){
+          die($e->getMessage());
+        }
+        return $msn;
+      }
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -390,22 +658,22 @@
 
     public function CreateAsig($data){
       try{
-        $sql = "SELECT * FROM portatil WHERE ser = '$data[2]' AND estado = 'Asignado'";
+        $sql = "SELECT * FROM equipo WHERE ser = '$data[1]' AND estado = 'Asignado'";
         $query = $this->pdo->prepare($sql);
         $query-> execute();
         $numero_asig = $query->rowCount();
 
-        $sql = "SELECT * FROM usuario WHERE ced = '$data[3]' AND estado = 'Asignado'";
+        $sql = "SELECT * FROM usuario WHERE ced = '$data[2]' AND estado = 'Asignado'";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $numero_usu = $query->rowCount();
 
-        $sql = "SELECT * FROM portatil WHERE ser = '$data[2]'";
+        $sql = "SELECT * FROM equipo WHERE ser = '$data[1]'";
         $query = $this->pdo->prepare($sql);
         $query-> execute();
         $num_asig = $query->rowCount();
 
-        $sql = "SELECT * FROM usuario WHERE ced = '$data[3]'";
+        $sql = "SELECT * FROM usuario WHERE ced = '$data[2]'";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $num_usu = $query->rowCount();
@@ -430,16 +698,16 @@
                 return $msn;
                 }else{
 
-                    $sql = "INSERT INTO asignacion VALUES('',?,?,?,?)";
+                    $sql = "INSERT INTO asignacion VALUES('',?,?,?)";
                     $query = $this->pdo->prepare($sql);
-                    $query->execute(array($data[0],$data[1],$data[2],$data[3]));
+                    $query->execute(array($data[0],$data[1],$data[2]));
                     $msn = "La asignacion fue guardada exitosamente";
 
-                    $sql = "UPDATE portatil SET estado = 'Asignado' WHERE ser = '$data[2]'";
+                    $sql = "UPDATE equipo SET estado = 'Asignado' WHERE ser = '$data[1]'";
                     $query = $this->pdo->prepare($sql);
                     $query->execute();
 
-                    $sql = "UPDATE usuario SET estado= 'Asignado' WHERE ced= '$data[3]'";
+                    $sql = "UPDATE usuario SET estado= 'Asignado' WHERE ced= '$data[2]'";
                     $query= $this->pdo->prepare($sql);
                     $query->execute();
                     }
@@ -491,20 +759,20 @@
       try {
         $sql = "DELETE FROM asignacion WHERE no_asig = :numero_asig";
         $query = $this->pdo->prepare($sql);
-        $query->bindValue(":numero_asig",$data[5]);
+        $query->bindValue(":numero_asig",$data[4]);
         $query->execute();
 
-        $sql = "UPDATE portatil SET estado = 'Sin asignacion' WHERE ser = '$data[3]'";
+        $sql = "UPDATE equipo SET estado = 'Sin asignacion' WHERE ser = '$data[2]'";
         $query = $this->pdo->prepare($sql);
         $query->execute();
 
-        $sql = "UPDATE usuario SET estado = 'Sin asignacion' WHERE ced = '$data[4]'";
+        $sql = "UPDATE usuario SET estado = 'Sin asignacion' WHERE ced = '$data[3]'";
         $query = $this->pdo->prepare($sql);
         $query->execute();
 
-        $sql = "INSERT INTO devolucion VALUES ('',?,?,?,?,?,?)";
+        $sql = "INSERT INTO devolucion VALUES ('',?,?,?,?,?)";
         $query = $this->pdo->prepare($sql);
-        $query->execute(array($data[0],$data[1],$data[2],$data[3],$data[4],$data[5]));
+        $query->execute(array($data[0],$data[1],$data[2],$data[3],$data[4]));
         $msn = "El equipo ha sido devuelto";
 
       }catch(PDOException $e) {
@@ -532,9 +800,9 @@
 
     public function SearchHis($data){
       try {
-        $sql= "SELECT * FROM devolucion WHERE no_dev LIKE ? OR fec_asig LIKE ? OR fec_dev LIKE ? OR tipo_dev LIKE ? OR ser LIKE ? OR ced LIKE ? OR no_asig LIKE ?";
+        $sql= "SELECT * FROM devolucion WHERE no_dev LIKE ? OR fec_asig LIKE ? OR fec_dev LIKE ? OR ser LIKE ? OR ced LIKE ? OR no_asig LIKE ?";
         $query = $this->pdo->prepare($sql);
-        $query->execute(array("%$data%","%$data%","%$data%","%$data%","%$data%","%$data%","%$data%"));
+        $query->execute(array("%$data%","%$data%","%$data%","%$data%","%$data%","%$data%"));
         $data= $query->fetchAll(PDO::FETCH_BOTH);
 
       }catch(PDOException $e) {
