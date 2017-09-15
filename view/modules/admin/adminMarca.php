@@ -33,3 +33,30 @@
         </ul>
       </div>
     </nav>
+
+    <h3>Sección de marca del equipo</h3>
+
+    <form action="?c=admin&a=CreateMarca" method="post">
+      <div class="input-field col s8 offset-s2">
+        <input type="text" name="data[]">
+        <label>Nueva Marca</label>
+      </div>
+
+      <button id="btn" class="btn col s4 offset-s2 blue darken-3">Guardar</button>
+    </form>
+
+    <a href="index.php" class="btn col s4 blue-grey darken-2">Cancelar</a>
+
+    <?php foreach($result as $data){ ?>
+
+      <div class="input-field col s8 offset-s2">
+        <input type="text" name="data[]" value="<?php echo $data->nom_marca; ?>">
+        <label>Nombre de la marca</label>
+      </div>
+
+      <a onclick="return confirm('¿Desea eliminar la marca permanentemente?')" id="btn" href="?id=<?php echo $data->no_marca; ?>&c=admin&a=DeleteMarca" class="btn col s8 offset-s2 blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar"><i class="small material-icons">delete</i></a>
+
+    <?php } ?>
+
+  </div>
+</div>

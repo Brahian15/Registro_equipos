@@ -36,12 +36,15 @@
 
     <h3>Sección de site del usuario</h3>
 
-    <div class="input-field col s8 offset-s2">
-      <input type="text" name="data[]" value="">
-      <label>Nuevo site</label>
-    </div>
+    <form action="?c=admin&a=CreateSite" method="post">
+      <div class="input-field col s8 offset-s2">
+        <input type="text" name="data[]">
+        <label>Nuevo site</label>
+      </div>
 
-    <a id="btn" href="?c=admin&a=CreateSite" class="btn input-field col s4 offset-s2 blue darken-3">Guardar</a>
+      <button id="btn" class="btn input-field col s4 offset-s2 blue darken-3">Guardar</button>
+    </form>
+
     <a href="index.php" class="btn input-field col s4 blue-grey darken-2">Cancelar</a>
 
     <?php foreach($result as $data){ ?>
@@ -51,7 +54,7 @@
         <label>Nombre del site</label>
       </div>
 
-      <a id="btn" href="?id=<?php echo $data->no_site; ?>&c=admin&a=DeleteSite" class="btn col s8 offset-s2 blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar"><i class="small material-icons">delete</i></a>
+      <a onclick="return confirm('¿Desea eliminar el site permanentemente?')" id="btn" href="?id=<?php echo $data->no_site; ?>&c=admin&a=DeleteSite" class="btn col s8 offset-s2 blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar"><i class="small material-icons">delete</i></a>
 
     <?php } ?>
 

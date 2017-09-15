@@ -171,7 +171,7 @@
 
     public function AdminSite(){
       require_once 'view/include/header.php';
-      $result= $this->model->readSitebyAdmin();
+      $result= $this->model->ReadSitebyAdmin();
       require_once 'view/modules/admin/adminSite.php';
       require_once 'view/include/footer.php';
     }
@@ -179,37 +179,89 @@
     public function CreateSite(){
       $data= $_POST['data'];
       $result= $this->model->CreateSite($data);
-      header("Location: ?c=admin&a=AdminSite");
+      header("Location:?c=admin&a=AdminSite&msn=$result");
     }
 
     public function DeleteSite(){
       $id= $_GET['id'];
       $result= $this->model->DeleteSite($id);
-      header("Location: ?c=admin&a=AdminSite&msn=$result");
+      header("Location:?c=admin&a=AdminSite&msn=$result");
     }
 
     public function AdminArea(){
       require_once 'view/include/header.php';
+      $result= $this->model->ReadAreabyAdmin();
       require_once 'view/modules/admin/adminArea.php';
       require_once 'view/include/footer.php';
     }
 
+    public function CreateArea(){
+      $data= $_POST['data'];
+      $result= $this->model->CreateArea($data);
+      header("Location:?c=admin&a=AdminArea&msn=$result");
+    }
+
+    public function DeleteArea(){
+      $id= $_GET['id'];
+      $result= $this->model->DeleteArea($id);
+      header("Location:?c=admin&a=AdminArea&msn=$result");
+    }
+
     public function AdminCargo(){
       require_once 'view/include/header.php';
-      require_once 'view/modules/admin/adminCargo.php';
+      $result= $this->model->ReadCargobyAdmin();
+      require_once 'view/modules/admin/AdminCargo.php';
       require_once 'view/include/footer.php';
+    }
+
+    public function CreateCargo(){
+      $data= $_POST['data'];
+      $result= $this->model->CreateCargo($data);
+      header("Location:?c=admin&a=AdminCargo&msn=$result");
+    }
+
+    public function DeleteCargo(){
+      $id= $_GET['id'];
+      $result= $this->model->DeleteCargo($id);
+      header("Location:?c=admin&a=AdminCargo&msn=$result");
     }
 
     public function AdminTipo(){
       require_once 'view/include/header.php';
+      $result= $this->model->ReadTipobyAdmin();
       require_once 'view/modules/admin/AdminTipo.php';
       require_once 'view/include/footer.php';
     }
 
+    public function CreateTipo(){
+      $data= $_POST['data'];
+      $result= $this->model->CreateTipo($data);
+      header("Location:?c=admin&a=AdminTipo&msn=$result");
+    }
+
+    public function DeleteTipo(){
+      $id= $_GET['id'];
+      $result= $this->model->DeleteTipo($id);
+      header("Location:?c=admin&a=AdminTipo&msn=$result");
+    }
+
     public function AdminMarca(){
       require_once 'view/include/header.php';
+      $result= $this->model->ReadMarcabyAdmin();
       require_once 'view/modules/admin/adminMarca.php';
       require_once 'view/include/footer.php';
+    }
+
+    public function CreateMarca(){
+      $data= $_POST['data'];
+      $result= $this->model->CreateMarca($data);
+      header("Location:?c=admin&a=AdminMarca&msn=$result");
+    }
+
+    public function DeleteMarca(){
+      $id= $_GET['id'];
+      $result= $this->model->DeleteMarca($id);
+      header("Location:?c=admin&a=AdminMarca&msn=$result");
     }
 
   }

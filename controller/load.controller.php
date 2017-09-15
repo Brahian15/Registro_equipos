@@ -11,44 +11,37 @@ class loadController{
   }
 
   public function LoadSite(){
-    $data= $this->load->readSitebyUser();
+    $data= $this->load->ReadSitebyUser();
     foreach ($data as $row){
       echo "<option value='".$row["no_site"]."'>".$row["nom_site"]."</option>";
     }
   }
 
   public function LoadArea(){
-    $data= $this->load->readArea();
+    $data= $this->load->ReadAreabyUser();
     foreach($data as $row){
       echo "<option value='".$row["no_area"]."'>".$row["nom_area"]."</option>";
     }
   }
 
   public function LoadCargo(){
-    $data= $this->load->readCargo();
+    $data= $this->load->ReadCargobyUser();
     foreach($data as $row){
       echo "<option value='".$row["no_cargo"]."'>".$row["nom_cargo"]."</option>";
     }
   }
 
   public function LoadTipo(){
-    $data= $this->load->readTipo();
+    $data= $this->load->ReadTipobyEqui();
     foreach($data as $row){
       echo "<option value='".$row["no_tipo"]."'>".$row["nom_tipo"]."</option>";
     }
   }
 
   public function LoadMarca(){
-    $data= $this->load->readMarca();
+    $data= $this->load->ReadMarcabyEqui();
     foreach($data as $row){
       echo "<option value='".$row["no_marca"]."'>".$row["nom_marca"]."</option>";
-    }
-  }
-
-  public function UpdateSite(){
-    $data= $this->load->readSite();
-    foreach($data as $row){
-      echo "<input type='text' value='".$row["nom_site"]."'>";
     }
   }
 

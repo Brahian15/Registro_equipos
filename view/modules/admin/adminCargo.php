@@ -33,3 +33,30 @@
         </ul>
       </div>
     </nav>
+
+    <h3>Sección de cargo del usuario</h3>
+
+    <form action="?c=admin&a=CreateCargo" method="post">
+      <div class="input-field col s8 offset-s2">
+        <input type="text" name="data[]">
+        <label>Nuevo cargo</label>
+      </div>
+
+      <button id="btn" class="btn col s4 offset-s2 blue darken-2">Guardar</button>
+    </form>
+
+    <a href="index.php" class="btn col s4 blue-grey darken-2">Cancelar</a>
+
+    <?php foreach($result as $data){ ?>
+
+      <div class="input-field col s8 offset-s2">
+        <input type="text" name="data[]" value="<?php echo $data->nom_cargo; ?>">
+        <label>Nombre del cargo</label>
+      </div>
+
+      <a onclick="return confirm('¿Desea eliminar el cargo permanentemente?')" id="btn" href="?id=<?php echo $data->no_cargo; ?>&c=admin&a=DeleteCargo" class="btn col s8 offset-s2 blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar"><i class="small material-icons">delete</i></a>
+
+    <?php } ?>
+
+  </div>
+</div>

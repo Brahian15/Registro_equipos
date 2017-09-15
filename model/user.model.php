@@ -145,9 +145,9 @@
         }
       }
 
-    //Trae los datos del select del site
+    //Trae los datos del select del site al formulario user
 
-    public function readSitebyUser(){
+    public function ReadSitebyUser(){
       try {
         $sql= "SELECT * FROM usu_site";
         $query= $this->pdo->prepare($sql);
@@ -160,7 +160,9 @@
       return $result;
     }
 
-    public function readSitebyAdmin(){
+    //Trae los datos del select del site al formulario adminSite
+
+    public function ReadSitebyAdmin(){
       try {
         $sql= "SELECT * FROM usu_site";
         $query= $this->pdo->prepare($sql);
@@ -173,18 +175,22 @@
       return $result;
     }
 
-  public function CreateSite($data){
-    try {
-      $sql= "INSERT INTO usu_site VALUES('',?)";
-      $query= $this->pdo->prepare($sql);
-      $query->execute(array($data[1]));
-      $msn= "El site fue guardado exitosamente";
+    //Guarda nuevos sites en la base de datos
 
-    }catch(PDOException $e){
-      die($e->getMessage());
+    public function CreateSite($data){
+      try {
+        $sql= "INSERT INTO usu_site VALUES('',?)";
+        $query= $this->pdo->prepare($sql);
+        $query->execute(array($data[0]));
+        $msn= "El site fue guardado exitosamente";
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $msn;
     }
-    return $msn;
-  }
+
+    //Elimina los sites de la base de datos
 
     public function DeleteSite($id){
       $sql= "SELECT * FROM usuario WHERE no_site='$id'";
@@ -213,7 +219,7 @@
 
     //Trae los datos del select del area
 
-    public function readArea(){
+    public function ReadAreabyUser(){
       try {
         $sql= "SELECT * FROM usu_area";
         $query= $this->pdo->prepare($sql);
@@ -226,9 +232,65 @@
       return $result;
     }
 
+    //Trae los datos del select al formulario de adminArea
+
+    public function ReadAreabyAdmin(){
+      try {
+        $sql= "SELECT * FROM usu_area";
+        $query= $this->pdo->prepare($sql);
+        $query->execute();
+        $result= $query->fetchAll(PDO::FETCH_OBJ);
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $result;
+    }
+
+    //Crea nuevas areas en la base de datos
+
+    public function CreateArea($data){
+      try {
+        $sql= "INSERT INTO usu_area VALUES('',?)";
+        $query= $this->pdo->prepare($sql);
+        $query->execute(array($data[0]));
+        $msn= "El area fue guardada exitosamente";
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $msn;
+    }
+
+    //Elimina el area de la base de datos
+
+    public function DeleteArea($id){
+      $sql= "SELECT * FROM usuario WHERE no_area='$id'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $id_area= $query->rowCount();
+
+      if ($id_area==true) {
+        $msn= "No se puede eliminar el site ya que cuenta con usuarios asignados";
+
+        return $msn;
+      }else{
+
+        try {
+          $sql= "DELETE FROM usu_area WHERE no_area='$id'";
+          $query= $this->pdo->prepare($sql);
+          $query->execute();
+          $msn= "El area se eliminó correctamente";
+        }catch(PDOException $e){
+          die($e->getMessage());
+        }
+        return $msn;
+      }
+    }
+
     //Trae los datos del select del cargo
 
-    public function readCargo(){
+    public function ReadCargobyUser(){
       try {
         $sql= "SELECT * FROM usu_cargo";
         $query= $this->pdo->prepare($sql);
@@ -239,6 +301,62 @@
         die($e->getMessage());
       }
       return $result;
+    }
+
+    //Trae los datos del select al formulario adminCargo
+
+    public function ReadCargobyAdmin(){
+      try {
+        $sql= "SELECT * FROM usu_cargo";
+        $query= $this->pdo->prepare($sql);
+        $query->execute();
+        $result= $query->fetchALL(PDO::FETCH_OBJ);
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $result;
+    }
+
+    //Guarda un nuevo cargo en la base de datos
+
+    public function CreateCargo($data){
+      try {
+        $sql= "INSERT INTO usu_cargo VALUES('',?)";
+        $query= $this->pdo->prepare($sql);
+        $query->execute(array($data[0]));
+        $msn= "El cargo fue creado exitosamente";
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $msn;
+    }
+
+    //Elimina los cargos de la base de datos
+
+    public function DeleteCargo($id){
+      $sql= "SELECT * FROM usuario WHERE no_cargo='$id'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $id_cargo= $query->rowCount();
+
+      if ($id_cargo==true){
+        $msn= "No se puede eliminar el cargo ya que cuenta con usuarios asignados";
+
+        return $msn;
+      }else{
+        try {
+          $sql= "DELETE FROM usu_cargo WHERE no_cargo='$id'";
+          $query= $this->pdo->prepare($sql);
+          $query->execute();
+          $msn= "El cargo se eliminó correctamente";
+
+        }catch(PDOException $e){
+          die($e->getMessage());
+        }
+        return $msn;
+      }
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -364,7 +482,7 @@
 
     //Trae los datos del select de tipo
 
-    public function readTipo(){
+    public function ReadTipobyEqui(){
       try {
         $sql= "SELECT * FROM equi_tipo";
         $query= $this->pdo->prepare($sql);
@@ -377,9 +495,65 @@
       return $result;
     }
 
+    //Trae los datos del select al formulario adminTipo
+
+    public function ReadTipobyAdmin(){
+      try {
+        $sql= "SELECT * FROM equi_tipo";
+        $query= $this->pdo->prepare($sql);
+        $query->execute();
+        $result= $query->fetchAll(PDO::FETCH_OBJ);
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $result;
+    }
+
+    //Guarda nuevos tipos a la base de datos
+
+    public function CreateTipo($data){
+      try {
+        $sql= "INSERT INTO equi_tipo VALUES('',?)";
+        $query= $this->pdo->prepare($sql);
+        $query->execute(array($data[0]));
+        $msn= "El tipo fue creado exitosamente";
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $msn;
+    }
+
+    //Elimina los tipos de la base de datos
+
+    public function DeleteTipo($id){
+      $sql= "SELECT * FROM equipo WHERE no_tipo='$id'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $id_tipo= $query->rowCount();
+
+      if ($id_tipo==true){
+        $msn= "No se puede eliminar el tipo ya que cuenta con un equipo asignado";
+
+        return $msn;
+      }else{
+        try {
+          $sql= "DELETE FROM equi_tipo WHERE no_tipo='$id'";
+          $query= $this->pdo->prepare($sql);
+          $query->execute();
+          $msn= "El tipo se eliminó exitosamente";
+
+        }catch(PDOException $e){
+          die($e->getMessage());
+        }
+        return $msn;
+      }
+    }
+
     //Trae los datos del select de marca
 
-    public function readMarca(){
+    public function ReadMarcabyEqui(){
       try {
         $sql= "SELECT * FROM equi_marca";
         $query= $this->pdo->prepare($sql);
@@ -390,6 +564,62 @@
         die($e->getMessage());
       }
       return $result;
+    }
+
+    //Trae los datos del select al formulario adminMarca
+
+    public function ReadMarcabyAdmin(){
+      try {
+        $sql= "SELECT * FROM equi_marca";
+        $query= $this->pdo->prepare($sql);
+        $query->execute();
+        $result= $query->fetchAll(PDO::FETCH_OBJ);
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $result;
+    }
+
+    //Guarda una nueva marca en la base de datos
+
+    public function CreateMarca($data){
+      try {
+        $sql= "INSERT INTO equi_marca VALUES('',?)";
+        $query= $this->pdo->prepare($sql);
+        $query->execute(array($data[0]));
+        $msn= "La marca se registró exitosamente";
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $msn;
+    }
+
+    //Elimina las marcas de la base de datos
+
+    public function DeleteMarca($id){
+      $sql= "SELECT * FROM equipo WHERE no_marca='$id'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $id_marca= $query->rowCount();
+
+      if ($id_marca==true){
+        $msn= "No se puede eliminar la marca ya que cuenta con equipos asignados";
+
+        return $msn;
+      }else{
+        try {
+          $sql= "DELETE FROM equi_marca WHERE no_marca='$id'";
+          $query= $this->pdo->prepare($sql);
+          $query->execute();
+          $msn= "La marca se eliminó correctamente";
+
+        }catch(PDOException $e){
+          die($e->getMessage());
+        }
+        return $msn;
+      }
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -570,9 +800,9 @@
 
     public function SearchHis($data){
       try {
-        $sql= "SELECT * FROM devolucion WHERE no_dev LIKE ? OR fec_asig LIKE ? OR fec_dev LIKE ? OR tipo_dev LIKE ? OR ser LIKE ? OR ced LIKE ? OR no_asig LIKE ?";
+        $sql= "SELECT * FROM devolucion WHERE no_dev LIKE ? OR fec_asig LIKE ? OR fec_dev LIKE ? OR ser LIKE ? OR ced LIKE ? OR no_asig LIKE ?";
         $query = $this->pdo->prepare($sql);
-        $query->execute(array("%$data%","%$data%","%$data%","%$data%","%$data%","%$data%","%$data%"));
+        $query->execute(array("%$data%","%$data%","%$data%","%$data%","%$data%","%$data%"));
         $data= $query->fetchAll(PDO::FETCH_BOTH);
 
       }catch(PDOException $e) {

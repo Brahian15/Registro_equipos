@@ -33,3 +33,30 @@
         </ul>
       </div>
     </nav>
+
+    <h3>Sección de tipo del equipo</h3>
+
+    <form action="?c=admin&a=CreateTipo" method="post">
+      <div class="input-field col s8 offset-s2">
+        <input type="text" name="data[]">
+        <label>Nuevo tipo</label>
+      </div>
+
+      <button id="btn" class="btn col s4 offset-s2 blue darken-3">Guardar</button>
+    </form>
+
+    <a href="index.php" class="btn col s4 blue-grey darken-2">Cancelar</a>
+
+    <?php foreach($result as $data){ ?>
+      
+      <div class="input-field col s8 offset-s2">
+        <input type="text" name="data[]" value="<?php echo $data->nom_tipo; ?>">
+        <label>Nombre del tipo</label>
+      </div>
+
+      <a onclick="return confirm('¿Desea eliminar el tipo permanentemente?')" id="btn" href="?id=<?php echo $data->no_tipo; ?>&c=admin&a=DeleteTipo" class="btn col s8 offset-s2 blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar"><i class="small material-icons">delete</i></a>
+
+    <?php } ?>
+
+  </div>
+</div>
