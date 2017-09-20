@@ -367,7 +367,7 @@
 
     public function SearchEqui($data){
       try {
-        $sql= "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo WHERE ser LIKE ? OR hostname LIKE ? OR estado LIKE ?";
+        $sql= "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo INNER JOIN equi_marca ON equipo.no_marca = equi_marca.no_marca WHERE ser LIKE ? OR hostname LIKE ? OR estado LIKE ?";
         $query = $this->pdo->prepare($sql);
         $query->execute(array("%$data%","%$data%","%$data%"));
         $data= $query->fetchALL(PDO::FETCH_BOTH);
@@ -409,7 +409,7 @@
 
     public function ReadEqui(){
       try {
-        $sql = "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo";
+        $sql = "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo INNER JOIN equi_marca ON equipo.no_marca = equi_marca.no_marca";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $result = $query->fetchALL(PDO::FETCH_OBJ);
