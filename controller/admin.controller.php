@@ -43,7 +43,7 @@ public function CreateUserLog(){
     if(!isset($_SESSION["user"])){
         require_once 'view/modules/auth/login.php';
     }else{
-        require_once 'view/dashboard.php';
+        require_once 'view/modules/dashboard.php';
     }
 
     require_once 'view/include/footer.php';

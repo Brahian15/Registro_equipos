@@ -31,6 +31,7 @@ $("#frmLogin").submit(function(e) {
         if ($(this).parsley().isValid()) {
             var email= $("#txtemail").val();
             var pass= $("#txtpass").val();
+            
             $.post("acceso",{email:email, pass:pass},function(data){
                 var data = JSON.parse(data);
 
