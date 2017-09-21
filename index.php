@@ -17,7 +17,7 @@
     require_once "controller/$controller.controller.php";
     $controller = ucwords($controller)."controller";
     $controller = new $controller();
-    $controller -> index();
+    $controller->index();
   }
   if(isset($_GET["msn"])){
     echo "<script>alert('".$_GET["msn"]."')</script>";

@@ -43,7 +43,7 @@ public function CreateUserLog(){
     if(!isset($_SESSION["user"])){
         require_once 'view/modules/auth/login.php';
     }else{
-        require_once 'view/modules/dashboard.php';
+        require_once 'view/modules/admin/readUser.php';
     }
 
     require_once 'view/include/footer.php';
@@ -58,12 +58,6 @@ public function CreateUserLog(){
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Modulo de usuario
-    public function cadsd(){
-      require_once 'view/include/header.php';
-      // $result = $this->model->ReadUser();
-      require_once 'view/modules/auth/login.php';
-      require_once 'view/include/footer.php';
-    }
 
     public function User(){
       require_once 'view/include/header.php';
@@ -307,6 +301,11 @@ public function CreateUserLog(){
       $id= $_GET['id'];
       $result= $this->model->DeleteMarca($id);
       header("Location:?c=admin&a=AdminMarca&msn=$result");
+    }
+
+    public function logout(){
+        session_destroy();
+        header("Location: index.php");
     }
 
   }

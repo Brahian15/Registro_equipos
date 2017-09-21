@@ -8,5 +8,5 @@ RewriteRule ^Ver_usuarios$                     index.php?c=admin&a=ReadUser
 RewriteRule ^Ver_equipos$                      index.php?c=admin&a=ReadEqui
 RewriteRule ^Ver_asignaciones$                 index.php?c=admin&a=ReadAsig
 RewriteRule ^Ver_historial$                    index.php?c=admin&a=ReadHis
-RewriteRule ^acceso$ 		                   index.php?c=auth&a=userAuth
-RewriteRule ^dashboard-practice$ 		       index.php?c=admin&a=index
+RewriteRule ^acceso$ 		                       index.php?c=auth&a=userAuth
+RewriteEule ^registrar$                        index.php?c=admin&a=CreateUserLog

@@ -3,7 +3,7 @@
 
     <nav>
       <ul id="dropdown1" class="dropdown-content">
-        <li><a href="?c=admin&a=index">Usuario</a></li>
+        <li><a href="?c=admin&a=ReadUser">Usuario</a></li>
         <li class="divider"></li>
         <li><a href="?c=admin&a=ReadEqui">Equipo</a></li>
         <li class="divider"></li>
@@ -30,6 +30,7 @@
           <li><a href="?c=admin&a=Equipo">Equipo</a></li>
           <li><a href="?c=admin&a=Asignacion">Asignación</a></li>
           <li><a class="dropdown-button" data-activates="dropdown2">Admin listas<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a href="?c=admin&a=logout">Cerrar Sesión</a></li>
         </ul>
       </div>
     </nav>
