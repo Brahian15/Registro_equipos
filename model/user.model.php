@@ -6,9 +6,9 @@
     public function __CONSTRUCT(){
 
       try{
-
         $this->pdo = DataBase::connect();
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
       }catch(PDOException $e){
         die($e->getMessage());
       }
@@ -16,9 +16,57 @@
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //LOGIN
+
+    public function CreateUserLog($data){
+      try{
+
+ 			 	$sql = "INSERT INTO users VALUES (?,?,?,?)";
+ 				$query = $this->pdo->prepare($sql);
+ 				$query->execute(array($data[4],$data[0],$data[1],$data[2]));
+
+ 				$sql = "INSERT INTO access VALUES (?,?,?,0,?)";
+ 				$query = $this->pdo->prepare($sql);
+ 				$query->execute(array($data[5],$data[4],$data[3],$data[6]));
+ 				$msn = "Guardo con exito";
+
+ 				}catch (PDOException $e) {
+          $code = $e->getCode();
+					$text = $e->getMessage();
+					$file = $e->getFile();
+					$line = $e->getLine();
+					$msn = "Ocurrio un error, notificarle al administrador";
+					DataBase::createLog($code, $text, $file, $line);
+ 			  }
+
+ 				return $msn;
+ 		 }
+
+     public function readUserbyEmail($data){
+   			try{
+
+   				$sql = "SELECT users.user_id, user_name, user_lastname, acc_token, acc_pass FROM users INNER JOIN access ON access.user_id = users.user_id WHERE user_email = ?";
+   				$query = $this->pdo->prepare($sql);
+   				$query->execute(array($data[0]));
+   				$result = $query->fetch(PDO::FETCH_BOTH);
+
+   			}catch (PDOException $e) {
+   				$code = $e->getCode();
+   				$text = $e->getMessage();
+   				$file = $e->getFile();
+   				$line = $e->getLine();
+
+   				DataBase::createLog($code, $text, $file, $line);
+   		}
+
+   		return $result;
+   	}
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     // CRUD Usuario
 
-    //FUnción para buscar usuarios.
+    //Función para buscar usuarios.
 
     public function searchUser($data){
     try{

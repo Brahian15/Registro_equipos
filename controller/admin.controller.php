@@ -1,22 +1,67 @@
 <?php
   require_once 'model/user.model.php';
   require_once 'load.controller.php';
+  require_once 'auth.controller.php';
+  require_once 'view/assets/random.php';
 
   class AdminController{
 
     private $model;
     private $load;
+    private $users;
 
     public function __CONSTRUCT(){
       $this->model = new UserModel();
       $this->load = new LoadController();
+      $this->users = new UserModel();
     }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//LOGIN
+
+public function CreateUserLog(){
+    $data = $_POST["data"];
+    // Indice4 = id usuario
+    // Indice5 = token
+    // Indice6 = status
+
+    $data[3] = password_hash($data[3], PASSWORD_DEFAULT);
+    $data[4] = "USU-".date('Ymd').'-'.date('hms');
+    $data[5] = randAlphanum(50);
+    $data[6] = "Inactivo";
+
+    // print_r($data);
+    $response = $this->users->CreateUserLog($data);
+    echo $response;
+
+}
+
+  public function index(){
+    require_once 'view/include/header.php';
+
+    if(!isset($_SESSION["user"])){
+        require_once 'view/modules/auth/login.php';
+    }else{
+        require_once 'view/dashboard.php';
+    }
+
+    require_once 'view/include/footer.php';
+  }
+
+  public function registerGuest(){
+
+      require_once 'view/include/header.php';
+      require_once 'view/modules/auth/register.php';
+      require_once 'view/include/footer.php';
+  }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Modulo de usuario
-    public function index(){
+    public function cadsd(){
       require_once 'view/include/header.php';
-      $result = $this->model->ReadUser();
-      require_once 'view/modules/admin/readUser.php';
+      // $result = $this->model->ReadUser();
+      require_once 'view/modules/auth/login.php';
       require_once 'view/include/footer.php';
     }
 
