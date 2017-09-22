@@ -3,7 +3,7 @@
 
     <nav>
       <ul id="dropdown1" class="dropdown-content">
-        <li><a href="?c=admin&a=ReadUser">Usuario</a></li>
+        <li><a href="?c=admin&a=index">Usuario</a></li>
         <li class="divider"></li>
         <li><a href="?c=admin&a=ReadEqui">Equipo</a></li>
         <li class="divider"></li>

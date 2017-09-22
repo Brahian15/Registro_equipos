@@ -22,6 +22,10 @@ class AuthController{
   }
 
   // Metodo para cerrar sesion
+  public function logout(){
+      session_destroy();
+      header("Location: inicio");
+  }
 
   public function userAuth(){
     $data[0] = $_POST["email"];
@@ -41,6 +45,7 @@ class AuthController{
        $_SESSION["user"]["email"] = $_POST["email"];
 
     }else{
+       $this->users->updateUserFail($data[0]);
        $return = array(false,"La contraseña no es la correcta");
     }
 
