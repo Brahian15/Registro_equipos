@@ -20,6 +20,19 @@ class AuthController{
       }
       echo json_encode($return);
   }
+  
+  public function notFoundMail(){
+    $email[0]= $_POST["email"];
+    $result = $this->users->readUserbyEmail($email);
+    
+    if(count($result['user_id'])<=0){
+          $return = array("",true);
+    }else{
+      $return = array("Correo ya esta en uso",false);
+    }
+    echo json_encode($return);
+    }
+
 
   // Metodo para cerrar sesion
   public function logout(){
