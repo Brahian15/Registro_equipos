@@ -2,6 +2,22 @@ body{
   background-color: #455a64;
 }
 
+.error, .parsley-errors-list{
+  color: red;
+  font-size: 12px;
+}
+
+#login{
+  border-radius: 10px;
+  background-color: white;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+#btnLogin{
+  margin-bottom: 5px;
+}
+
 #filas{
   border-radius: 10px;
   background-color: white;

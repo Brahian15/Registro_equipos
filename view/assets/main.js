@@ -31,12 +31,12 @@ $("#frmLogin").submit(function(e) {
         if ($(this).parsley().isValid()) {
             var email= $("#txtemail").val();
             var pass= $("#txtpass").val();
-            
+
             $.post("acceso",{email:email, pass:pass},function(data){
                 var data = JSON.parse(data);
 
                 if(data[0] == true){
-                  document.location.href="dashboard-practice";
+                  document.location.href="Ver-usuarios";
                 }else{
                   alert(data[1]);
                 }
