@@ -1,7 +1,6 @@
 <div class="row" id="pg-registro">
-  <h3 class="center-align">REGISTRAR USUARIO</h3>
-  <div class="col m4 offset-m4 blue-grey lighten-5">
-    <div class="row">
+  <div id="registro" class="col m4 offset-m4 blue-grey lighten-5">
+    <h3 class="center-align">REGISTRAR USUARIO</h3>
       <form action="Guardar" method="post" data-parsley-validate>
         <div class="input-field col s12">
           <input  id="namereg" type="text" class="validate" name="data[]" required="required">
@@ -23,11 +22,12 @@
           <label for="passreg">Contraseña</label>
         </div>
 
-        <div class="col s12">
-          <button class="btn cyan waves-effect waves-light" style="width:100%; margin-top:20px">GUARDAR USUARIO</button>
-        </div>
+        <button id="btnReg" class="btn waves-effect waves-light blue darken-3 col s6">Guardar</button>
+
       </form>
-    </div>
+
+      <a id="btnCanc" href="Inicio" class="btn blue-grey darken-2 col s5 offset-s1">Cancelar</a>
+
   </div>
 
 </div>

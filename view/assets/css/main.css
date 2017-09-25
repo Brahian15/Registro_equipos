@@ -7,15 +7,21 @@ body{
   font-size: 12px;
 }
 
-#login{
+#login, #registro{
   border-radius: 10px;
   background-color: white;
   margin-top: 20px;
   border-radius: 10px;
+  background-color: white;
 }
 
-#btnLogin{
-  margin-bottom: 5px;
+#btnReg, #btnCanc{
+  margin-bottom: 30px;
+}
+
+#btnRegis{
+  margin-left: 20px;
+  margin-bottom: 30px;
 }
 
 #filas{
@@ -32,8 +38,4 @@ body{
 
 h3{
   text-align: center;
-}
-
-nav{
-  background-color: green;
 }

@@ -1,5 +1,5 @@
 <div class="row" id="pg-inicio">
-  <div id="" class="z-depth-4 center col m4 offset-m4">
+  <div id="login" class="z-depth-4 center col m4 offset-m4">
       <form id="frmLogin" method="post" data-parsley-validate>
         <h3 class="center-align">INICIAR SESION</h3>
         <div class="input-field col s12">
@@ -12,10 +12,11 @@
           <label for="txtpass">Contraseña</label>
         </div>
 
-        <div class="col s6">
-          <button type="submit" class="btn waves-effect waves-light blue darken-3" style="width:100%; margin-top:20px" id="btnLogin">INICIAR SESION</button>
-        </div>
+        <button type="submit" class="btn waves-effect waves-light blue darken-3 col s6" id="btnLogin">Iniciar sesion</button>
+
       </form>
-    <div class="center"><a href="Registro" id="btn" class="btn blue-grey darken-2 col s5">Registrar Usuario</a></div>
+
+      <a href="Registro" id="btnRegis" class="btn blue-grey darken-2 col s5">Registrarse</a>
+
   </div>
 </div>
