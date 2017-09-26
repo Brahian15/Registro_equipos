@@ -33,7 +33,8 @@ public function CreateUserLog(){
 
     // print_r($data);
     $response = $this->model->CreateUserLog($data);
-    header("Location: Inicio");
+    
+    header("Location: Inicio?msn=$response");
 }
 
   public function index(){
