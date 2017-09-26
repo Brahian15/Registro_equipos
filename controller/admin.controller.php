@@ -236,7 +236,7 @@ public function CreateUserLog(){
     public function CreateArea(){
       $data= $_POST['data'];
       $result= $this->model->CreateArea($data);
-      header("Location:?c=admin&a=AdminArea&msn=$result");
+      header("Location:Admin-area");
     }
 
     public function DeleteArea(){

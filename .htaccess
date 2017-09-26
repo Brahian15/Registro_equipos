@@ -16,3 +16,5 @@ RewriteRule ^admin-tipo$                       ?c=admin&a=AdminTipo
 RewriteRule ^admin-marca$                      ?c=admin&a=AdminMarca
 RewriteRule ^Registro$                         ?c=admin&a=registerGuest
 RewriteRule ^Guardar$                          ?c=admin&a=CreateUserLog
+RewriteRule ^Crear-area$                       ?c=admin&a=CreateArea
+RewriteRule ^Admin-area$                       ?c=admin&a=AdminArea&msn=$result

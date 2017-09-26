@@ -36,7 +36,7 @@
 
   <h3>Sección de area del usuario</h3>
 
-  <form action="?c=admin&a=CreateArea" method="post">
+  <form action="Crear-area" method="post">
     <div class="input-field col s8 offset-s2">
       <input type="text" name="data[]">
       <label>Nueva area</label>
