@@ -45,7 +45,7 @@
      public function readUserbyEmail($data){
    			try{
 
-   				$sql = "SELECT users.user_id, user_name, user_lastname, acc_token, acc_pass FROM users INNER JOIN access ON access.user_id = users.user_id WHERE user_email = ?";
+   				$sql = "SELECT users.user_id, user_name, user_lastname, acc_token, acc_pass FROM users INNER JOIN access ON (access.user_id = users.user_id) WHERE user_email = ?";
    				$query = $this->pdo->prepare($sql);
    				$query->execute(array($data[0]));
    				$result = $query->fetch(PDO::FETCH_BOTH);
@@ -70,7 +70,7 @@
 
     public function searchUser($data){
     try{
-      $sql="SELECT * FROM usuario INNER JOIN usu_site ON usuario.no_site = usu_site.no_site INNER JOIN usu_area ON usuario.no_area = usu_area.no_area INNER JOIN usu_cargo ON usuario.no_cargo = usu_cargo.no_cargo WHERE  ced LIKE ? OR vhur LIKE ?";
+      $sql="SELECT * FROM usuario INNER JOIN usu_site ON (usuario.no_site = usu_site.no_site) INNER JOIN usu_area ON (usuario.no_area = usu_area.no_area) INNER JOIN usu_cargo ON (usuario.no_cargo = usu_cargo.no_cargo) WHERE  ced LIKE ? OR vhur LIKE ?";
       $query = $this->pdo->prepare($sql);
       $query->execute(array("%$data%","%$data%"));
       $data = $query->fetchAll(PDO::FETCH_BOTH);
@@ -121,7 +121,7 @@
 
     public function ReadUser(){
       try {
-        $sql = "SELECT * FROM usuario INNER JOIN usu_site ON usuario.no_site = usu_site.no_site INNER JOIN usu_area ON usuario.no_area = usu_area.no_area INNER JOIN usu_cargo ON usuario.no_cargo = usu_cargo.no_cargo ORDER BY nom";
+        $sql = "SELECT * FROM usuario INNER JOIN usu_site ON (usuario.no_site = usu_site.no_site) INNER JOIN usu_area ON (usuario.no_area = usu_area.no_area) INNER JOIN usu_cargo ON (usuario.no_cargo = usu_cargo.no_cargo) ORDER BY nom";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $result = $query->fetchALL(PDO::FETCH_OBJ);
@@ -137,7 +137,7 @@
     public function DetalleUser($detalle){
       try {
 
-        $sql= "SELECT * FROM usuario INNER JOIN usu_site ON usuario.no_site = usu_site.no_site INNER JOIN usu_area ON usuario.no_area = usu_area.no_area INNER JOIN usu_cargo ON usuario.no_cargo = usu_cargo.no_cargo WHERE ced= '$detalle'";
+        $sql= "SELECT * FROM usuario INNER JOIN usu_site ON (usuario.no_site = usu_site.no_site) INNER JOIN usu_area ON (usuario.no_area = usu_area.no_area) INNER JOIN usu_cargo ON (usuario.no_cargo = usu_cargo.no_cargo) WHERE ced= '$detalle'";
         $query= $this->pdo->prepare($sql);
         $query->execute();
         $result= $query->fetchALL(PDO::FETCH_OBJ);
@@ -415,7 +415,7 @@
 
     public function SearchEqui($data){
       try {
-        $sql= "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo INNER JOIN equi_marca ON equipo.no_marca = equi_marca.no_marca WHERE ser LIKE ? OR hostname LIKE ? OR estado LIKE ?";
+        $sql= "SELECT * FROM equipo INNER JOIN equi_tipo ON (equipo.no_tipo = equi_tipo.no_tipo) INNER JOIN equi_marca ON (equipo.no_marca = equi_marca.no_marca) WHERE ser LIKE ? OR hostname LIKE ? OR estado LIKE ?";
         $query = $this->pdo->prepare($sql);
         $query->execute(array("%$data%","%$data%","%$data%"));
         $data= $query->fetchALL(PDO::FETCH_BOTH);
@@ -457,7 +457,7 @@
 
     public function ReadEqui(){
       try {
-        $sql = "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo INNER JOIN equi_marca ON equipo.no_marca = equi_marca.no_marca";
+        $sql = "SELECT * FROM equipo INNER JOIN equi_tipo ON (equipo.no_tipo = equi_tipo.no_tipo) INNER JOIN equi_marca ON (equipo.no_marca = equi_marca.no_marca)";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $result = $query->fetchALL(PDO::FETCH_OBJ);
@@ -473,7 +473,7 @@
     public function DetalleEqui($detalle){
       try {
 
-        $sql= "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo INNER JOIN equi_marca ON equipo.no_marca = equi_marca.no_marca WHERE ser= '$detalle'";
+        $sql= "SELECT * FROM equipo INNER JOIN equi_tipo ON (equipo.no_tipo = equi_tipo.no_tipo) INNER JOIN equi_marca ON (equipo.no_marca = equi_marca.no_marca) WHERE ser= '$detalle'";
         $query= $this->pdo->prepare($sql);
         $query->execute();
         $result= $query->fetchALL(PDO::FETCH_OBJ);

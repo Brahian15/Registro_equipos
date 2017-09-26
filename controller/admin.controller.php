@@ -94,7 +94,7 @@ public function CreateUserLog(){
     public function DeleteUser(){
       $id = $_GET['id'];
       $result = $this->model->DeleteUser($id);
-      header("Location: ?c=admin&a=index&msn=$result");
+      header("Location: ?c=admin&a=readUser&msn=$result");
     }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

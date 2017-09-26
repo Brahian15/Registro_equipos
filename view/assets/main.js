@@ -36,7 +36,7 @@ $("#frmLogin").submit(function(e) {
                 var data = JSON.parse(data);
 
                 if(data[0] == true){
-                  document.location.href="Ver-usuarios";
+                  document.location.href="?c=admin&a=readUser";
                 }else{
                   alert(data[1]);
                 }

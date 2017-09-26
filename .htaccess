@@ -1,20 +1,6 @@
 RewriteEngine On
 
 RewriteRule ^Inicio$                           index.php
-RewriteRule ^Usuario$                          ?c=admin&a=User
-RewriteRule ^Equipo$                           ?c=admin&a=Equipo
-RewriteRule ^Asignacion$                       ?c=admin&a=Asignacion
-RewriteRule ^Ver-usuarios$                     ?c=admin&a=ReadUser
-RewriteRule ^Ver-equipos$                      ?c=admin&a=ReadEqui
-RewriteRule ^Ver-asignaciones$                 ?c=admin&a=ReadAsig
-RewriteRule ^Ver-historial$                    ?c=admin&a=ReadHis
 RewriteRule ^acceso$ 		                       ?c=auth&a=userAuth
-RewriteRule ^admin-site$                       ?c=admin&a=AdminSite
-RewriteRule ^admin-area$                       ?c=admin&a=AdminArea
-RewriteRule ^admin-cargo$                      ?c=admin&a=AdminCargo
-RewriteRule ^admin-tipo$                       ?c=admin&a=AdminTipo
-RewriteRule ^admin-marca$                      ?c=admin&a=AdminMarca
 RewriteRule ^Registro$                         ?c=admin&a=registerGuest
 RewriteRule ^Guardar$                          ?c=admin&a=CreateUserLog
-RewriteRule ^Crear-area$                       ?c=admin&a=CreateArea
-RewriteRule ^Admin-area$                       ?c=admin&a=AdminArea&msn=$result
