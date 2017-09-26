@@ -51,7 +51,7 @@ class AuthController{
        $_SESSION["user"]["email"] = $_POST["email"];
 
     }else{
-       $this->users->updateUserFail($data[0]);
+       // $this->users->updateUserFail($data[0]);
        $return = array(false,"La contraseña no es la correcta");
     }
 
