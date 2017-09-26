@@ -42,16 +42,8 @@
     <input type="date" name="data[]" required value="<?php echo $fecha; ?>" class="tooltiped" data-position="bottom" data-tooltip="Fecha de asignación">
   </div>
 
-  <!-- <div class="input-field col s4">
-    <select name="data[]">
-      <option disabled selected> Seleccione el tipo</option>
-      <?php $this->load->LoadTipo(); ?>
-    </select>
-    <label>Tipo</label>
-  </div> -->
-
   <div class="input-field col s4 offset-s2">
-    <input type="text" name="data[]" class="validate" required>
+    <input type="text" name="data[]" class="validate" required autofocus>
     <label>Serial</label>
   </div>
 

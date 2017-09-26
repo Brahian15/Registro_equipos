@@ -1,9 +1,11 @@
 <div class="row" id="pg-registro">
-  <div id="registro" class="col m4 offset-m4 blue-grey lighten-5">
-    <h3 class="center-align">REGISTRAR USUARIO</h3>
+  <div id="registro" class="z-depth-4 col m4 offset-m4">
+    <div class="card-panel blue darken-3">
+      <h3 class="center-align">REGISTRAR USUARIO</h3>
+    </div>
       <form action="Guardar" method="post" data-parsley-validate>
         <div class="input-field col s12">
-          <input  id="namereg" type="text" class="validate" name="data[]" required="required">
+          <input  id="namereg" type="text" class="validate" name="data[]" required="required" autofocus>
           <label for="namereg">Nombre</label>
          </div>
 

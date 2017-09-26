@@ -38,7 +38,7 @@
       <h3>Registro de usuarios</h3>
 
       <div class="input-field col s8 offset-s2">
-        <input type="text" name="data[]" class="validate" required>
+        <input type="text" name="data[]" class="validate" required autofocus>
         <label>DUI</label>
       </div>
 

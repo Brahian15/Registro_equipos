@@ -38,7 +38,7 @@
     <h3>Registro de equipos</h3>
 
     <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" class="validate" required>
+      <input type="text" name="data[]" class="validate" required autofocus>
       <label>Serial</label>
     </div>
 

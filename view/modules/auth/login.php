@@ -1,9 +1,11 @@
 <div class="row" id="pg-inicio">
   <div id="login" class="z-depth-4 center col m4 offset-m4">
       <form id="frmLogin" method="post" data-parsley-validate>
-        <h3 class="center-align">INICIAR SESION</h3>
+        <div class="card-panel blue darken-3">
+          <h3 class="center-align">INICIAR SESION</h3>
+        </div>
         <div class="input-field col s12">
-          <input  id="txtemail" type="email" class="validate" name="data[]" required="required">
+          <input  id="txtemail" type="email" class="validate" name="data[]" required="required" autofocus>
           <label for="txtemail">Correo Electronico</label>
          </div>
 

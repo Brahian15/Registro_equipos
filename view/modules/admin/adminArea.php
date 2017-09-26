@@ -38,7 +38,7 @@
 
   <form action="Crear-area" method="post">
     <div class="input-field col s8 offset-s2">
-      <input type="text" name="data[]">
+      <input type="text" name="data[]" autofocus>
       <label>Nueva area</label>
     </div>
 

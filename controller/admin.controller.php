@@ -33,7 +33,7 @@ public function CreateUserLog(){
 
     // print_r($data);
     $response = $this->model->CreateUserLog($data);
-    
+
     header("Location: Inicio?msn=$response");
 }
 
@@ -83,7 +83,7 @@ public function CreateUserLog(){
     public function UpdateUser(){
       $data = $_POST['data'];
       $result = $this->model->UpdateUser($data);
-      header("Location: ?c=admin&a=index&msn=$result");
+      header("Location: ?c=admin&a=readUser&msn=$result");
     }
 
     public function CreateUser(){
@@ -139,7 +139,7 @@ public function CreateUserLog(){
     public function DeleteEqui(){
       $id = $_GET['id'];
       $result = $this->model->DeleteEqui($id);
-      header("Location: index.php?c=admin&a=ReadEqui&msn=$result");
+      header("Location: ?c=admin&a=ReadEqui&msn=$result");
     }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -188,7 +188,7 @@ public function CreateUserLog(){
     public function CreateDev(){
       $data = $_POST["data"];
       $result = $this->model->CreateDev($data);
-      header("Location: index.php?c=admin&a=ReadAsig&msn=$result");
+      header("Location: ?c=admin&a=ReadAsig&msn=$result");
     }
 
     public function ReadHis(){
@@ -218,13 +218,13 @@ public function CreateUserLog(){
     public function CreateSite(){
       $data= $_POST['data'];
       $result= $this->model->CreateSite($data);
-      header("Location:?c=admin&a=AdminSite&msn=$result");
+      header("Location: ?c=admin&a=AdminSite&msn=$result");
     }
 
     public function DeleteSite(){
       $id= $_GET['id'];
       $result= $this->model->DeleteSite($id);
-      header("Location:?c=admin&a=AdminSite&msn=$result");
+      header("Location: ?c=admin&a=AdminSite&msn=$result");
     }
 
     public function AdminArea(){
@@ -243,7 +243,7 @@ public function CreateUserLog(){
     public function DeleteArea(){
       $id= $_GET['id'];
       $result= $this->model->DeleteArea($id);
-      header("Location:?c=admin&a=AdminArea&msn=$result");
+      header("Location: ?c=admin&a=AdminArea&msn=$result");
     }
 
     public function AdminCargo(){
@@ -256,13 +256,13 @@ public function CreateUserLog(){
     public function CreateCargo(){
       $data= $_POST['data'];
       $result= $this->model->CreateCargo($data);
-      header("Location:?c=admin&a=AdminCargo&msn=$result");
+      header("Location: ?c=admin&a=AdminCargo&msn=$result");
     }
 
     public function DeleteCargo(){
       $id= $_GET['id'];
       $result= $this->model->DeleteCargo($id);
-      header("Location:?c=admin&a=AdminCargo&msn=$result");
+      header("Location: ?c=admin&a=AdminCargo&msn=$result");
     }
 
     public function AdminTipo(){
@@ -275,13 +275,13 @@ public function CreateUserLog(){
     public function CreateTipo(){
       $data= $_POST['data'];
       $result= $this->model->CreateTipo($data);
-      header("Location:?c=admin&a=AdminTipo&msn=$result");
+      header("Location: ?c=admin&a=AdminTipo&msn=$result");
     }
 
     public function DeleteTipo(){
       $id= $_GET['id'];
       $result= $this->model->DeleteTipo($id);
-      header("Location:?c=admin&a=AdminTipo&msn=$result");
+      header("Location: ?c=admin&a=AdminTipo&msn=$result");
     }
 
     public function AdminMarca(){
@@ -294,13 +294,13 @@ public function CreateUserLog(){
     public function CreateMarca(){
       $data= $_POST['data'];
       $result= $this->model->CreateMarca($data);
-      header("Location:?c=admin&a=AdminMarca&msn=$result");
+      header("Location: ?c=admin&a=AdminMarca&msn=$result");
     }
 
     public function DeleteMarca(){
       $id= $_GET['id'];
       $result= $this->model->DeleteMarca($id);
-      header("Location:?c=admin&a=AdminMarca&msn=$result");
+      header("Location: ?c=admin&a=AdminMarca&msn=$result");
     }
 
     // Metodo para cerrar sesion

@@ -39,7 +39,7 @@
       <h3>Buscar usuarios</h3>
 
       <div class="input-field col s5 offset-s3">
-        <input type="text" name="user">
+        <input type="text" name="user" autofocus>
       </div>
 
       <button type="submit" class="input-field col s1 btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Buscar" href="?c=admin&a=SearchUser"><i class="small material-icons">search</i></button>
