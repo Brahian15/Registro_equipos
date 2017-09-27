@@ -46,6 +46,8 @@ public function CreateUserLog(){
         require_once 'view/modules/admin/readUser.php';
     }
 
+    $_SESSION["user"]["name"];
+
     require_once 'view/include/footer.php';
   }
 

@@ -87,6 +87,6 @@
 
   </form>
 
-    <a href="?c=admin&a=index" class="btn input-field col s4 blue-grey darken-2">Cancelar</a>
+    <a href="?c=admin&a=readUser" class="btn input-field col s4 blue-grey darken-2">Cancelar</a>
 
 </div>

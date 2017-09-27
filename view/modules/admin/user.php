@@ -82,7 +82,7 @@
       </div>
 
       <button class="btn input-field col s4 offset-s2 blue darken-3" id="btn">Guardar</button>
-      <a href="Ver-usuarios" class="btn input-field col s4 blue-grey darken-2">Cancelar</a>
+      <a href="?c=admin&a=readUser" class="btn input-field col s4 blue-grey darken-2">Cancelar</a>
 
   </div>
 </form>

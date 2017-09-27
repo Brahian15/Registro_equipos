@@ -52,10 +52,10 @@
     <label>DUI</label>
   </div>
 
-  <button id="btn" href="" class="waves-effect waves-light btn input-field col s4 offset-s2 card-panel blue darken-3">Guardar</button>
+  <button id="btn" onclick="return confirm('¿Desea guardar la asignación?')" class="waves-effect waves-light btn input-field col s4 offset-s2 card-panel blue darken-3">Guardar</button>
 
 </form>
 
-  <a href="Ver-usuarios" class="waves-effect waves-light btn input-field col s4 card-panel blue-grey darken-2">Cancelar</a>
+  <a href="?c=admin&a=readUser" class="waves-effect waves-light btn input-field col s4 card-panel blue-grey darken-2">Cancelar</a>
 
 </div>
