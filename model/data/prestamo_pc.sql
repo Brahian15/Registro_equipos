@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-09-2017 a las 23:10:00
+-- Tiempo de generación: 28-09-2017 a las 17:16:30
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -42,7 +42,8 @@ CREATE TABLE `access` (
 
 INSERT INTO `access` (`acc_token`, `user_id`, `acc_pass`, `acc_failed_att`, `acc_status`) VALUES
 ('3SPBj58gMZzsZaosyjXxaJ1dHlp8w4BbwIv2tIAeYH9wkpTMJf', 'USU-20170926-100930', '$2y$10$YXQelcwlOZRuKAhAECEvVergEBy.mlKRjOoVeFJJDOn2jvm8cnev.', 0, 'Inactivo'),
-('EG28PtPzxWdhNCCeWETMaBxgONfyd7NK1YcQxdvwBASsLqVAuE', 'USU-20170926-040955', '$2y$10$kPQecCVV37nW8l1uKldHtur/hksxFvCd.sqOaGgywLjmJ5.S/cCYS', 0, 'Inactivo');
+('EG28PtPzxWdhNCCeWETMaBxgONfyd7NK1YcQxdvwBASsLqVAuE', 'USU-20170926-040955', '$2y$10$kPQecCVV37nW8l1uKldHtur/hksxFvCd.sqOaGgywLjmJ5.S/cCYS', 0, 'Inactivo'),
+('MPz7n2TcpZuB4RI7iozQp9cCIwA9Hrx7gP0xLUbHeHpbRWAyWo', 'USU-20170927-090904', '$2y$10$VhGHXuMe0iOb13JOiFkdj..ioV0HckjUZQpioUonSPL23RWHf648O', 0, 'Inactivo');
 
 -- --------------------------------------------------------
 
@@ -53,17 +54,11 @@ INSERT INTO `access` (`acc_token`, `user_id`, `acc_pass`, `acc_failed_att`, `acc
 CREATE TABLE `asignacion` (
   `no_asig` int(11) NOT NULL,
   `fec_asig` date NOT NULL,
+  `tipo_asig` varchar(30) NOT NULL,
   `ser` varchar(100) NOT NULL,
-  `ced` int(11) NOT NULL
+  `ced` int(11) NOT NULL,
+  `user_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `asignacion`
---
-
-INSERT INTO `asignacion` (`no_asig`, `fec_asig`, `ser`, `ced`) VALUES
-(1, '2017-09-18', '1308', 1234989649),
-(3, '2017-09-20', '2123', 43731786);
 
 -- --------------------------------------------------------
 
@@ -100,7 +95,10 @@ INSERT INTO `devolucion` (`no_dev`, `fec_asig`, `fec_dev`, `ser`, `ced`, `no_asi
 (44, '2017-09-05', '2017-09-01', '1308', 1234989649, 4),
 (45, '2017-09-12', '2017-09-12', '1309', 1234989649, 7),
 (46, '2017-09-14', '2017-09-14', '1308', 1234989649, 2),
-(47, '2017-09-20', '2017-09-20', '2123', 43731786, 2);
+(47, '2017-09-20', '2017-09-20', '2123', 43731786, 2),
+(48, '2017-09-20', '2017-09-26', '2123', 43731786, 3),
+(49, '2017-09-28', '2017-09-28', '2123', 43731786, 2),
+(50, '2017-09-18', '2017-09-28', '1308', 1234989649, 1);
 
 -- --------------------------------------------------------
 
@@ -129,8 +127,8 @@ CREATE TABLE `equipo` (
 --
 
 INSERT INTO `equipo` (`ser`, `no_tipo`, `no_marca`, `model`, `memo`, `disc_duro`, `procesador`, `sis_operativo`, `type`, `cons_inventario`, `hostname`, `adicional`, `estado`) VALUES
-('1308', 1, 1, 'nkj', 'njk', 'njkn', 'jkn', 'jkn', 'jkn', '4t5amhrs', '2155', '', 'Asignado'),
-('2123', 1, 1, 'hjbhj', 'bhjb', 'hjbhjb', 'hjb', 'hbhj', 'bh', 'hb', 'hj', 'hj', 'Asignado');
+('1308', 1, 1, 'nkj', 'njk', 'njkn', 'jkn', 'jkn', 'jkn', '4t5amhrs', '2155', '', 'Sin asignacion'),
+('2123', 1, 1, 'hjbhj', 'bhjb', 'hjbhjb', 'hjb', 'hbhj', 'bh', 'hb', 'hj', 'hj', 'Sin asignacion');
 
 -- --------------------------------------------------------
 
@@ -168,8 +166,7 @@ CREATE TABLE `equi_tipo` (
 
 INSERT INTO `equi_tipo` (`no_tipo`, `nom_tipo`) VALUES
 (1, 'Portatil'),
-(2, 'Desktop'),
-(3, 'Tablet');
+(2, 'Desktop');
 
 -- --------------------------------------------------------
 
@@ -190,7 +187,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_lastname`, `user_email`) VALUES
 ('USU-20170926-040955', 'Brahian', 'Grajales', 'brahian.verde@hotmail.com'),
-('USU-20170926-100930', 'sdafa', 'sadf', 'begrajales@gmail.com');
+('USU-20170926-100930', 'sdafa', 'sadf', 'begrajales@gmail.com'),
+('USU-20170927-090904', 'brahian', 'grajales', 'brahian@prueba.com');
 
 -- --------------------------------------------------------
 
@@ -214,8 +212,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`ced`, `no_site`, `no_area`, `no_cargo`, `vhur`, `nom`, `tel`, `estado`) VALUES
-(43731786, 20, 8, 8, 5487, 'jkb', 56, 'Asignado'),
-(1234989649, 21, 5, 5, 3780, 'Brahian', 3137634842, 'Asignado');
+(43731786, 20, 5, 5, 5487, 'Carlitos', 5644458, 'Sin asignacion'),
+(1234989649, 20, 5, 5, 3780, 'Lorenzo', 3137634842, 'Sin asignacion');
 
 -- --------------------------------------------------------
 
@@ -291,7 +289,8 @@ ALTER TABLE `access`
 ALTER TABLE `asignacion`
   ADD PRIMARY KEY (`no_asig`),
   ADD KEY `ser` (`ser`),
-  ADD KEY `ced` (`ced`);
+  ADD KEY `ced` (`ced`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indices de la tabla `asig_dev`
@@ -367,12 +366,12 @@ ALTER TABLE `usu_site`
 -- AUTO_INCREMENT de la tabla `asignacion`
 --
 ALTER TABLE `asignacion`
-  MODIFY `no_asig` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `no_asig` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `devolucion`
 --
 ALTER TABLE `devolucion`
-  MODIFY `no_dev` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `no_dev` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 --
 -- AUTO_INCREMENT de la tabla `equi_marca`
 --
@@ -382,12 +381,12 @@ ALTER TABLE `equi_marca`
 -- AUTO_INCREMENT de la tabla `equi_tipo`
 --
 ALTER TABLE `equi_tipo`
-  MODIFY `no_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `no_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `usu_area`
 --
 ALTER TABLE `usu_area`
-  MODIFY `no_area` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `no_area` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `usu_cargo`
 --
@@ -413,7 +412,8 @@ ALTER TABLE `access`
 --
 ALTER TABLE `asignacion`
   ADD CONSTRAINT `asignacion_ibfk_1` FOREIGN KEY (`ser`) REFERENCES `equipo` (`ser`),
-  ADD CONSTRAINT `asignacion_ibfk_2` FOREIGN KEY (`ced`) REFERENCES `usuario` (`ced`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `asignacion_ibfk_2` FOREIGN KEY (`ced`) REFERENCES `usuario` (`ced`),
+  ADD CONSTRAINT `asignacion_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `asig_dev`
