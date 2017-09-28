@@ -38,14 +38,16 @@ public function CreateUserLog(){
 }
 
   public function index(){
-    require_once 'view/include/header.php';
+   
 
     if(!isset($_SESSION["user"])){
-        require_once 'view/modules/auth/login.php';
+       header("location: index.php?c=auth&a=login ");
     }else{
-        require_once 'view/modules/admin/readUser.php';
+       require_once 'view/include/header.php';
+       require_once 'view/modules/admin/readUser.php';
+       require_once 'view/include/footer.php';
     }
-    require_once 'view/include/footer.php';
+  
   }
 
   public function registerGuest(){

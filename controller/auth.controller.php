@@ -9,6 +9,12 @@ class AuthController{
     $this->users = new UserModel();
   }
 
+  public function login(){
+     require_once 'view/include/header.php';
+     require_once 'view/modules/auth/login.php';
+     require_once 'view/include/footer.php';
+  }
+
   public function validEmail(){
       $email[0] = $_POST["email"];
       $response = $this->users->readUserbyEmail($email);
