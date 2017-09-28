@@ -61,6 +61,7 @@ if(isset($_POST['user'])){
           <th>Fecha de asignación</th>
           <th>Serial</th>
           <th>DUI</th>
+          <th>Asignado por</th>
           <th>Acción</th>
         </tr>
       </thead>
@@ -71,6 +72,7 @@ if(isset($_POST['user'])){
           <td><?php $date = new DateTime($row['fec_asig']); echo $date->format('d-m-Y'); ?></td>
           <td><?php echo $row['ser']; ?></td>
           <td><?php echo $row['ced']; ?></td>
+          <td><?php echo $row['user_name']; ?></td>
           <td><a href="?Devolucion=<?php echo $row['ser'];?>&c=admin&a=ReadDev" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Devolucion de equipo"><i class="small material-icons">compare_arrows</i></a></td>
         </tr>
       </tbody>
@@ -91,6 +93,7 @@ if(isset($_POST['user'])){
           <th>Fecha de asignación</th>
           <th>Serial</th>
           <th>DUI</th>
+          <th>Asignado por</th>
           <th>Acción</th>
         </tr>
       </thead>
@@ -101,6 +104,7 @@ if(isset($_POST['user'])){
             <td><?php $date = new DateTime($data->fec_asig); echo $date->format('d-m-Y') ; ?></td>
             <td><?php echo $data->ser; ?></td>
             <td><?php echo $data->ced; ?></td>
+            <td><?php echo $data->user_name; ?></td>
             <td><a href="?Devolucion=<?php echo $data->ser?>&c=admin&a=ReadDev" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Devolucion de equipo"><i class="small material-icons">compare_arrows</i></a></td>
           </tr>
         </tbody>

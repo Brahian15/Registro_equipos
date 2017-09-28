@@ -678,7 +678,7 @@
 
     public function SearchAsig($data){
       try {
-        $sql= 'SELECT * FROM asignacion WHERE ser LIKE ? OR ced LIKE ?';
+        $sql= 'SELECT * FROM asignacion INNER JOIN users ON (asignacion.user_id = users.user_id) WHERE ser LIKE ? OR ced LIKE ?';
         $query= $this->pdo->prepare($sql);
         $query->execute(array("%$data%","%$data%"));
         $data= $query->fetchALL(PDO::FETCH_BOTH);
@@ -691,7 +691,7 @@
 
     public function SearchAsigbyEqui($serial){
       try {
-        $sql= "SELECT * FROM asignacion WHERE ser= '$serial'";
+        $sql= "SELECT * FROM asignacion INNER JOIN users ON (asignacion.user_id = users.user_id) WHERE ser= '$serial'";
         $query= $this->pdo->prepare($sql);
         $query->execute();
         $serial= $query->fetchALL(PDO::FETCH_OBJ);
@@ -746,9 +746,9 @@
                 return $msn;
                 }else{
 
-                    $sql = "INSERT INTO asignacion VALUES('',?,?,?)";
+                    $sql = "INSERT INTO asignacion VALUES('',?,?,?,?)";
                     $query = $this->pdo->prepare($sql);
-                    $query->execute(array($data[0],$data[1],$data[2]));
+                    $query->execute(array($data[0],$data[1],$data[2],$_SESSION["user"]["code"]));
                     $msn = "La asignacion fue guardada exitosamente";
 
                     $sql = "UPDATE equipo SET estado = 'Asignado' WHERE ser = '$data[1]'";
@@ -770,7 +770,7 @@
 
     public function ReadAsig(){
       try {
-        $sql = "SELECT * FROM asignacion";
+        $sql = "SELECT * FROM asignacion INNER JOIN users ON (asignacion.user_id = users.user_id)";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $result = $query->fetchALL(PDO::FETCH_OBJ);

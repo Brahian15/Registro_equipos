@@ -35,6 +35,10 @@ body{
   margin-right: 5px;
 }
 
+table{
+  margin-bottom: 30px;
+}
+
 h3{
   text-align: center;
 }
