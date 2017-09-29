@@ -54,7 +54,9 @@
       <label>Nombre del cargo</label>
     </div>
 
-    <a onclick="return confirm('¿Desea eliminar el cargo permanentemente?')" id="btn" href="?id=<?php echo $data->no_cargo; ?>&c=admin&a=DeleteCargo" class="btn col s8 offset-s2 blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar"><i class="small material-icons">delete</i></a>
+    <?php if($_SESSION["user"]["rol"] == "1"){ ?>
+      <a onclick="return confirm('¿Desea eliminar el cargo permanentemente?')" id="btn" href="?id=<?php echo $data->no_cargo; ?>&c=admin&a=DeleteCargo" class="btn col s8 offset-s2 blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar"><i class="small material-icons">delete</i></a>
+    <?php } ?>
 
   <?php } ?>
 

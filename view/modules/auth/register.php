@@ -9,10 +9,17 @@
           <label for="namereg">Nombre</label>
          </div>
 
-         <div class="input-field col s12">
-           <input  id="lastNamereg" type="text" class="validate" name="data[]" required="required">
-           <label for="lastNamereg">Apellido</label>
-          </div>
+        <div class="input-field col s12">
+          <input  id="lastNamereg" type="text" class="validate" name="data[]" required="required">
+          <label for="lastNamereg">Apellido</label>
+        </div>
+
+        <div class="input-field col s12">
+          <select name="data[]">
+            <option disabled selected>Seleccione el rol</option>
+            <?php $this->load->LoadRol(); ?>
+          </select>
+        </div>
 
         <div class="input-field col s12">
           <input  id="emailreg" type="email" class="validate" name="data[]" required="required">

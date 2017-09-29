@@ -45,6 +45,13 @@ class loadController{
     }
   }
 
+  public function LoadRol(){
+    $data= $this->load->ReadRol();
+    foreach($data as $row){
+      echo "<option value='".$row["no_rol"]."'>".$row["nom_rol"]."</option>";
+    }
+  }
+
 
 }
 

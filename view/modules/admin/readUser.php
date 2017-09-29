@@ -83,7 +83,9 @@ if(isset($_POST['user'])){
           <td><?php echo $row['nom_cargo']; ?></td>
           <td><?php echo $row['estado']; ?></td>
           <td><a href="?detalle=<?php echo $row['ced'];?>&c=admin&a=DetalleUser" class="btn blue-grey darken-2 tooltiped" data-position="top" data-tooltip="Actualizar usuario"><i class="small material-icons">update</i></a></td>
-          <td><a href="?id=<?php echo $row['ced'];?>&c=admin&a=DeleteUser" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar usuario" onclick="return confirm('¿Desea eliminar el usuario permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <?php if($_SESSION["user"]["rol"] == "1"){ ?>
+            <td><a href="?id=<?php echo $row['ced'];?>&c=admin&a=DeleteUser" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar usuario" onclick="return confirm('¿Desea eliminar el usuario permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <?php } ?>
         </tr>
       </tbody>
     </table>
@@ -123,7 +125,9 @@ if(isset($_POST['user'])){
           <td><?php echo $data->nom_cargo; ?></td>
           <td><?php echo $data->estado; ?></td>
           <td><a href="?detalle=<?php echo $data->ced?>&c=admin&a=DetalleUser" class="btn blue-grey darken-2 tooltiped" data-position="top" data-tooltip="Actualizar usuario"><i class="small material-icons">update</i></a></td>
-          <td><a onclick="return confirm('¿Desea eliminar el usuario permanentemente?')" href="?id=<?php echo $data->ced?>&c=admin&a=DeleteUser" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar usuario"><i class="small material-icons">delete</i></a></td>
+          <?php if($_SESSION["user"]["rol"] == "1"){ ?>
+            <td><a onclick="return confirm('¿Desea eliminar el usuario permanentemente?')" href="?id=<?php echo $data->ced?>&c=admin&a=DeleteUser" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar usuario"><i class="small material-icons">delete</i></a></td>
+          <?php } ?>
         </tr>
       </tbody>
     <?php  } ?>

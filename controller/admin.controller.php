@@ -26,10 +26,10 @@ public function CreateUserLog(){
     // Indice5 = token
     // Indice6 = status
 
-    $data[3] = password_hash($data[3], PASSWORD_DEFAULT);
-    $data[4] = "USU-".date('Ymd').'-'.date('hms');
-    $data[5] = randAlphanum(50);
-    $data[6] = "Inactivo";
+    $data[4] = password_hash($data[4], PASSWORD_DEFAULT);
+    $data[5] = "USU-".date('Ymd').'-'.date('hms');
+    $data[6] = randAlphanum(50);
+    $data[7] = "Inactivo";
 
     $response = $this->model->CreateUserLog($data);
 

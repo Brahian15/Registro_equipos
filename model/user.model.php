@@ -21,13 +21,13 @@
     public function CreateUserLog($data){
       try{
 
- 			 	$sql = "INSERT INTO users VALUES (?,?,?,?)";
+ 			 	$sql = "INSERT INTO users VALUES (?,?,?,?,?)";
  				$query = $this->pdo->prepare($sql);
- 				$query->execute(array($data[4],$data[0],$data[1],$data[2]));
+ 				$query->execute(array($data[5],$data[0],$data[1],$data[3],$data[2]));
 
  				$sql = "INSERT INTO access VALUES (?,?,?,0,?)";
  				$query = $this->pdo->prepare($sql);
- 				$query->execute(array($data[5],$data[4],$data[3],$data[6]));
+ 				$query->execute(array($data[6],$data[5],$data[4],$data[7]));
  				$msn = "Guardo con exito";
 
  				}catch (PDOException $e) {
@@ -45,7 +45,7 @@
      public function readUserbyEmail($data){
    			try{
 
-   				$sql = "SELECT users.user_id, user_name, user_lastname, acc_token, acc_pass FROM users INNER JOIN access ON (access.user_id = users.user_id) WHERE user_email = ?";
+   				$sql = "SELECT users.user_id, users.user_name, users.user_lastname, access.acc_token, access.acc_pass, rol.no_rol FROM users INNER JOIN access ON (users.user_id = access.user_id) INNER JOIN rol ON (users.no_rol = rol.no_rol) WHERE user_email = ?";
    				$query = $this->pdo->prepare($sql);
    				$query->execute(array($data[0]));
    				$result = $query->fetch(PDO::FETCH_BOTH);
@@ -61,6 +61,19 @@
 
    		return $result;
    	}
+
+      public function ReadRol(){
+        try {
+          $sql= "SELECT * FROM rol";
+          $query= $this->pdo->prepare($sql);
+          $query->execute();
+          $result= $query->fetchAll(PDO::FETCH_BOTH);
+
+        }catch(PDOException $e){
+          die($e->getMessage());
+        }
+        return $result;
+      }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
