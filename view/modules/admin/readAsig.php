@@ -3,11 +3,11 @@
 
     <nav>
       <ul id="dropdown1" class="dropdown-content">
-        <li><a href="?c=admin&a=index">Usuario</a></li>
+        <li><a href="?c=admin&a=ReadUser">Usuario</a></li>
         <li class="divider"></li>
         <li><a href="?c=admin&a=ReadEqui">Equipo</a></li>
         <li class="divider"></li>
-        <li><a href="?c=admin&a=ReadAsig">Asignación</a></li>
+        <li class="active"><a href="?c=admin&a=ReadAsig">Asignación</a></li>
         <li class="divider"></li>
         <li><a href="?c=admin&a=ReadHis">Historial</a></li>
       </ul>
@@ -24,12 +24,13 @@
       </ul>
       <div class="nav-wrapper blue darken-3">
         <a class="brand-logo right"><img src="../../../../S.R.P.C/view/assets/imagenes/Logo.png" alt="Logo Onelink"></a>
-        <ul id="nav-movile">
+        <ul id="nav-mobile">
           <li class="active"><a class="dropdown-button" data-activates="dropdown1">Buscar<i class="material-icons right">arrow_drop_down</i></a></li>
           <li><a href="?c=admin&a=User">Usuario</a></li>
           <li><a href="?c=admin&a=Equipo">Equipo</a></li>
           <li><a href="?c=admin&a=Asignacion">Asignación</a></li>
           <li><a class="dropdown-button" data-activates="dropdown2">Admin listas<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a href="index.php?c=admin&a=logout">Cerrar Sesión</a></li>
         </ul>
       </div>
     </nav>
@@ -38,7 +39,7 @@
       <h3>Buscar asignaciones</h3>
 
       <div class="input-field col s5 offset-s3">
-        <input type="text" name="user">
+        <input type="text" name="user" autofocus>
       </div>
 
       <button type="submit" class="input-field col s1 btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Buscar" href="#"><i class="small material-icons">search</i></button>
@@ -60,6 +61,7 @@ if(isset($_POST['user'])){
           <th>Fecha de asignación</th>
           <th>Serial</th>
           <th>DUI</th>
+          <th>Asignado por</th>
           <th>Acción</th>
         </tr>
       </thead>
@@ -70,6 +72,7 @@ if(isset($_POST['user'])){
           <td><?php $date = new DateTime($row['fec_asig']); echo $date->format('d-m-Y'); ?></td>
           <td><?php echo $row['ser']; ?></td>
           <td><?php echo $row['ced']; ?></td>
+          <td><?php echo $row['nombre_completo']; ?></td>
           <td><a href="?Devolucion=<?php echo $row['ser'];?>&c=admin&a=ReadDev" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Devolucion de equipo"><i class="small material-icons">compare_arrows</i></a></td>
         </tr>
       </tbody>
@@ -90,6 +93,7 @@ if(isset($_POST['user'])){
           <th>Fecha de asignación</th>
           <th>Serial</th>
           <th>DUI</th>
+          <th>Asignado por</th>
           <th>Acción</th>
         </tr>
       </thead>
@@ -100,6 +104,7 @@ if(isset($_POST['user'])){
             <td><?php $date = new DateTime($data->fec_asig); echo $date->format('d-m-Y') ; ?></td>
             <td><?php echo $data->ser; ?></td>
             <td><?php echo $data->ced; ?></td>
+            <td><?php echo $data->nombre_completo; ?></td>
             <td><a href="?Devolucion=<?php echo $data->ser?>&c=admin&a=ReadDev" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Devolucion de equipo"><i class="small material-icons">compare_arrows</i></a></td>
           </tr>
         </tbody>

@@ -6,9 +6,9 @@
     public function __CONSTRUCT(){
 
       try{
-
         $this->pdo = DataBase::connect();
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
       }catch(PDOException $e){
         die($e->getMessage());
       }
@@ -16,13 +16,61 @@
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //LOGIN
+
+    public function CreateUserLog($data){
+      try{
+
+ 			 	$sql = "INSERT INTO users VALUES (?,?,?,?)";
+ 				$query = $this->pdo->prepare($sql);
+ 				$query->execute(array($data[4],$data[0],$data[1],$data[2]));
+
+ 				$sql = "INSERT INTO access VALUES (?,?,?,0,?)";
+ 				$query = $this->pdo->prepare($sql);
+ 				$query->execute(array($data[5],$data[4],$data[3],$data[6]));
+ 				$msn = "Guardo con exito";
+
+ 				}catch (PDOException $e) {
+          $code = $e->getCode();
+					$text = $e->getMessage();
+					$file = $e->getFile();
+					$line = $e->getLine();
+					$msn = "Ocurrio un error, notificarle al administrador";
+					DataBase::createLog($code, $text, $file, $line);
+ 			  }
+
+ 				return $msn;
+ 		 }
+
+     public function readUserbyEmail($data){
+   			try{
+
+   				$sql = "SELECT users.user_id, user_name, user_lastname, acc_token, acc_pass FROM users INNER JOIN access ON (access.user_id = users.user_id) WHERE user_email = ?";
+   				$query = $this->pdo->prepare($sql);
+   				$query->execute(array($data[0]));
+   				$result = $query->fetch(PDO::FETCH_BOTH);
+
+   			}catch (PDOException $e) {
+   				$code = $e->getCode();
+   				$text = $e->getMessage();
+   				$file = $e->getFile();
+   				$line = $e->getLine();
+
+   				DataBase::createLog($code, $text, $file, $line);
+   		}
+
+   		return $result;
+   	}
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     // CRUD Usuario
 
-    //FUnción para buscar usuarios.
+    //Función para buscar usuarios.
 
     public function searchUser($data){
     try{
-      $sql="SELECT * FROM usuario INNER JOIN usu_site ON usuario.no_site = usu_site.no_site INNER JOIN usu_area ON usuario.no_area = usu_area.no_area INNER JOIN usu_cargo ON usuario.no_cargo = usu_cargo.no_cargo WHERE  ced LIKE ? OR vhur LIKE ?";
+      $sql="SELECT * FROM usuario INNER JOIN usu_site ON (usuario.no_site = usu_site.no_site) INNER JOIN usu_area ON (usuario.no_area = usu_area.no_area) INNER JOIN usu_cargo ON (usuario.no_cargo = usu_cargo.no_cargo) WHERE  ced LIKE ? OR vhur LIKE ?";
       $query = $this->pdo->prepare($sql);
       $query->execute(array("%$data%","%$data%"));
       $data = $query->fetchAll(PDO::FETCH_BOTH);
@@ -73,7 +121,7 @@
 
     public function ReadUser(){
       try {
-        $sql = "SELECT * FROM usuario INNER JOIN usu_site ON usuario.no_site = usu_site.no_site INNER JOIN usu_area ON usuario.no_area = usu_area.no_area INNER JOIN usu_cargo ON usuario.no_cargo = usu_cargo.no_cargo ORDER BY nom";
+        $sql = "SELECT * FROM usuario INNER JOIN usu_site ON (usuario.no_site = usu_site.no_site) INNER JOIN usu_area ON (usuario.no_area = usu_area.no_area) INNER JOIN usu_cargo ON (usuario.no_cargo = usu_cargo.no_cargo) ORDER BY nom";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $result = $query->fetchALL(PDO::FETCH_OBJ);
@@ -89,7 +137,7 @@
     public function DetalleUser($detalle){
       try {
 
-        $sql= "SELECT * FROM usuario INNER JOIN usu_site ON usuario.no_site = usu_site.no_site INNER JOIN usu_area ON usuario.no_area = usu_area.no_area INNER JOIN usu_cargo ON usuario.no_cargo = usu_cargo.no_cargo WHERE ced= '$detalle'";
+        $sql= "SELECT * FROM usuario INNER JOIN usu_site ON (usuario.no_site = usu_site.no_site) INNER JOIN usu_area ON (usuario.no_area = usu_area.no_area) INNER JOIN usu_cargo ON (usuario.no_cargo = usu_cargo.no_cargo) WHERE ced= '$detalle'";
         $query= $this->pdo->prepare($sql);
         $query->execute();
         $result= $query->fetchALL(PDO::FETCH_OBJ);
@@ -367,7 +415,7 @@
 
     public function SearchEqui($data){
       try {
-        $sql= "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo INNER JOIN equi_marca ON equipo.no_marca = equi_marca.no_marca WHERE ser LIKE ? OR hostname LIKE ? OR estado LIKE ?";
+        $sql= "SELECT * FROM equipo INNER JOIN equi_tipo ON (equipo.no_tipo = equi_tipo.no_tipo) INNER JOIN equi_marca ON (equipo.no_marca = equi_marca.no_marca) WHERE ser LIKE ? OR hostname LIKE ? OR estado LIKE ?";
         $query = $this->pdo->prepare($sql);
         $query->execute(array("%$data%","%$data%","%$data%"));
         $data= $query->fetchALL(PDO::FETCH_BOTH);
@@ -409,7 +457,7 @@
 
     public function ReadEqui(){
       try {
-        $sql = "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo INNER JOIN equi_marca ON equipo.no_marca = equi_marca.no_marca";
+        $sql = "SELECT * FROM equipo INNER JOIN equi_tipo ON (equipo.no_tipo = equi_tipo.no_tipo) INNER JOIN equi_marca ON (equipo.no_marca = equi_marca.no_marca)";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $result = $query->fetchALL(PDO::FETCH_OBJ);
@@ -425,7 +473,7 @@
     public function DetalleEqui($detalle){
       try {
 
-        $sql= "SELECT * FROM equipo INNER JOIN equi_tipo ON equipo.no_tipo = equi_tipo.no_tipo INNER JOIN equi_marca ON equipo.no_marca = equi_marca.no_marca WHERE ser= '$detalle'";
+        $sql= "SELECT * FROM equipo INNER JOIN equi_tipo ON (equipo.no_tipo = equi_tipo.no_tipo) INNER JOIN equi_marca ON (equipo.no_marca = equi_marca.no_marca) WHERE ser= '$detalle'";
         $query= $this->pdo->prepare($sql);
         $query->execute();
         $result= $query->fetchALL(PDO::FETCH_OBJ);
@@ -630,7 +678,7 @@
 
     public function SearchAsig($data){
       try {
-        $sql= 'SELECT * FROM asignacion WHERE ser LIKE ? OR ced LIKE ?';
+        $sql= "SELECT asignacion.no_asig, asignacion.fec_asig, asignacion.ser, asignacion.ced, CONCAT(users.user_name, ' ', users.user_lastname) AS nombre_completo FROM asignacion INNER JOIN users ON (asignacion.user_id = users.user_id) WHERE ser LIKE ? OR ced LIKE ?";
         $query= $this->pdo->prepare($sql);
         $query->execute(array("%$data%","%$data%"));
         $data= $query->fetchALL(PDO::FETCH_BOTH);
@@ -643,7 +691,7 @@
 
     public function SearchAsigbyEqui($serial){
       try {
-        $sql= "SELECT * FROM asignacion WHERE ser= '$serial'";
+        $sql= "SELECT asignacion.no_asig, asignacion.fec_asig, asignacion.ser, asignacion.ced, CONCAT(users.user_name, ' ', users.user_lastname) AS nombre_completo FROM asignacion INNER JOIN users ON (asignacion.user_id = users.user_id) WHERE ser= '$serial'";
         $query= $this->pdo->prepare($sql);
         $query->execute();
         $serial= $query->fetchALL(PDO::FETCH_OBJ);
@@ -698,9 +746,9 @@
                 return $msn;
                 }else{
 
-                    $sql = "INSERT INTO asignacion VALUES('',?,?,?)";
+                    $sql = "INSERT INTO asignacion VALUES('',?,?,?,?)";
                     $query = $this->pdo->prepare($sql);
-                    $query->execute(array($data[0],$data[1],$data[2]));
+                    $query->execute(array($data[0],$data[1],$data[2],$_SESSION["user"]["code"]));
                     $msn = "La asignacion fue guardada exitosamente";
 
                     $sql = "UPDATE equipo SET estado = 'Asignado' WHERE ser = '$data[1]'";
@@ -722,7 +770,7 @@
 
     public function ReadAsig(){
       try {
-        $sql = "SELECT * FROM asignacion";
+        $sql = "SELECT asignacion.no_asig, asignacion.fec_asig, asignacion.ser, asignacion.ced, CONCAT(users.user_name, ' ', users.user_lastname) AS nombre_completo FROM asignacion INNER JOIN users ON (asignacion.user_id = users.user_id)";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $result = $query->fetchALL(PDO::FETCH_OBJ);
@@ -770,9 +818,9 @@
         $query = $this->pdo->prepare($sql);
         $query->execute();
 
-        $sql = "INSERT INTO devolucion VALUES ('',?,?,?,?,?)";
+        $sql = "INSERT INTO devolucion VALUES ('',?,?,?,?,?,?)";
         $query = $this->pdo->prepare($sql);
-        $query->execute(array($data[0],$data[1],$data[2],$data[3],$data[4]));
+        $query->execute(array($data[0],$data[1],$data[2],$data[3],$data[4],$data[5]));
         $msn = "El equipo ha sido devuelto";
 
       }catch(PDOException $e) {

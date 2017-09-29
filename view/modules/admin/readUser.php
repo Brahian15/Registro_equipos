@@ -3,7 +3,7 @@
 
     <nav>
       <ul id="dropdown1" class="dropdown-content">
-        <li><a href="?c=admin&a=index">Usuario</a></li>
+        <li class="active"><a href="?c=admin&a=ReadUser">Usuario</a></li>
         <li class="divider"></li>
         <li><a href="?c=admin&a=ReadEqui">Equipo</a></li>
         <li class="divider"></li>
@@ -30,6 +30,7 @@
           <li><a href="?c=admin&a=Equipo">Equipo</a></li>
           <li><a href="?c=admin&a=Asignacion">Asignación</a></li>
           <li><a class="dropdown-button" data-activates="dropdown2">Admin listas<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a href="index.php?c=admin&a=logout">Cerrar Sesión</a></li>
         </ul>
       </div>
     </nav>
@@ -38,7 +39,7 @@
       <h3>Buscar usuarios</h3>
 
       <div class="input-field col s5 offset-s3">
-        <input type="text" name="user">
+        <input type="text" name="user" autofocus>
       </div>
 
       <button type="submit" class="input-field col s1 btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Buscar" href="?c=admin&a=SearchUser"><i class="small material-icons">search</i></button>
