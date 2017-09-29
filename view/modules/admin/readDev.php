@@ -63,6 +63,11 @@
       <label>Número de asignación</label>
     </div>
 
+    <div class="input-field col s8 offset-s2">
+      <textarea id="textarea1" class="materialize-textarea" type="text" name="data[]"></textarea>
+      <label for="textarea1">Comentarios</label>
+    </div>
+
   <?php } ?>
 
     <button id="btn" class="btn input-field col s4 offset-s2 blue darken-3">Devolver</button>

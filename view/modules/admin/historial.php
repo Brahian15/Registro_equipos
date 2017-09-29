@@ -62,6 +62,7 @@
           <th>Fecha de devolución</th>
           <th>Serial</th>
           <th>DUI</th>
+          <th>Comentarios</th>
           <th>Acción</th>
         </tr>
       </thead>
@@ -73,6 +74,7 @@
             <td><?php $date = new DateTime($row['fec_dev']); echo $date->format('d-m-Y'); ?></td>
             <td><?php echo $row['ser']; ?></td>
             <td><?php echo $row['ced']; ?></td>
+            <td><?php echo $row['coment']; ?></td>
             <td><a href="?id=<?php echo $row['no_dev'];?>&c=admin&a=DeleteDev" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar devolución" onclick="return confirm('¿Desea eliminar la devolución permanentemente?')"><i class="small material-icons">delete</i></a></td>
           </tr>
         </tbody>
@@ -94,6 +96,7 @@
           <th>Fecha de devolución</th>
           <th>Serial</th>
           <th>DUI</th>
+          <th>Comentarios</th>
           <th>Acción</th>
         </tr>
       </thead>
@@ -105,6 +108,7 @@
             <td><?php $date = new DateTime($data->fec_dev); echo $date->format('d-m-Y'); ?></td>
             <td><?php echo $data->ser; ?></td>
             <td><?php echo $data->ced; ?></td>
+            <td><?php echo $data->coment; ?></td>
             <td><a href="?id=<?php echo $data->no_dev?>&c=admin&a=DeleteDev" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar devolución" onclick="return confirm('¿Desea eliminar la devolucón permanentemente?')"><i class="small material-icons">delete</i></a></td>
           </tr>
         </tbody>

@@ -42,9 +42,7 @@ public function CreateUserLog(){
     if(!isset($_SESSION["user"])){
        header("location: index.php?c=auth&a=login ");
     }else{
-       require_once 'view/include/header.php';
-       require_once 'view/modules/admin/readUser.php';
-       require_once 'view/include/footer.php';
+      header("Location: ?c=admin&a=ReadUser");
     }
 
   }

@@ -678,7 +678,7 @@
 
     public function SearchAsig($data){
       try {
-        $sql= 'SELECT * FROM asignacion INNER JOIN users ON (asignacion.user_id = users.user_id) WHERE ser LIKE ? OR ced LIKE ?';
+        $sql= "SELECT asignacion.no_asig, asignacion.fec_asig, asignacion.ser, asignacion.ced, CONCAT(users.user_name, ' ', users.user_lastname) AS nombre_completo FROM asignacion INNER JOIN users ON (asignacion.user_id = users.user_id) WHERE ser LIKE ? OR ced LIKE ?";
         $query= $this->pdo->prepare($sql);
         $query->execute(array("%$data%","%$data%"));
         $data= $query->fetchALL(PDO::FETCH_BOTH);
@@ -691,7 +691,7 @@
 
     public function SearchAsigbyEqui($serial){
       try {
-        $sql= "SELECT * FROM asignacion INNER JOIN users ON (asignacion.user_id = users.user_id) WHERE ser= '$serial'";
+        $sql= "SELECT asignacion.no_asig, asignacion.fec_asig, asignacion.ser, asignacion.ced, CONCAT(users.user_name, ' ', users.user_lastname) AS nombre_completo FROM asignacion INNER JOIN users ON (asignacion.user_id = users.user_id) WHERE ser= '$serial'";
         $query= $this->pdo->prepare($sql);
         $query->execute();
         $serial= $query->fetchALL(PDO::FETCH_OBJ);
@@ -770,7 +770,7 @@
 
     public function ReadAsig(){
       try {
-        $sql = "SELECT * FROM asignacion INNER JOIN users ON (asignacion.user_id = users.user_id)";
+        $sql = "SELECT asignacion.no_asig, asignacion.fec_asig, asignacion.ser, asignacion.ced, CONCAT(users.user_name, ' ', users.user_lastname) AS nombre_completo FROM asignacion INNER JOIN users ON (asignacion.user_id = users.user_id)";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $result = $query->fetchALL(PDO::FETCH_OBJ);
@@ -818,9 +818,9 @@
         $query = $this->pdo->prepare($sql);
         $query->execute();
 
-        $sql = "INSERT INTO devolucion VALUES ('',?,?,?,?,?)";
+        $sql = "INSERT INTO devolucion VALUES ('',?,?,?,?,?,?)";
         $query = $this->pdo->prepare($sql);
-        $query->execute(array($data[0],$data[1],$data[2],$data[3],$data[4]));
+        $query->execute(array($data[0],$data[1],$data[2],$data[3],$data[4],$data[5]));
         $msn = "El equipo ha sido devuelto";
 
       }catch(PDOException $e) {
