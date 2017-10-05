@@ -1,8 +1,12 @@
 <?php
+  use PHPMailer\PHPMailer\PHPMailer;
+  use PHPMailer\PHPMailer\Exception;
+
   require_once 'model/user.model.php';
   require_once 'load.controller.php';
   require_once 'auth.controller.php';
   require_once 'view/assets/random.php';
+  require_once 'vendor/autoload.php';
 
   class AdminController{
 
@@ -16,46 +20,55 @@
       $this->users = new UserModel();
     }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                                LOGIN                                                       //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//LOGIN
+    //Funcion para crear los campos del acceso del usuario
 
-public function CreateUserLog(){
-    $data = $_POST["data"];
-    // Indice4 = id usuario
-    // Indice5 = token
-    // Indice6 = status
+    public function CreateUserLog(){
+      $data = $_POST["data"];
+      // Indice4 = id usuario
+      // Indice5 = token
+      // Indice6 = status
 
-    $data[3] = password_hash($data[3], PASSWORD_DEFAULT);
-    $data[4] = "USU-".date('Ymd').'-'.date('hms');
-    $data[5] = randAlphanum(50);
-    $data[6] = "Inactivo";
+      $data[3] = password_hash($data[3], PASSWORD_DEFAULT);
+      $data[4] = "USU-".date('Ymd').'-'.date('hms');
+      $data[5] = randAlphanum(50);
+      $data[6] = "Inactivo";
 
-    $response = $this->model->CreateUserLog($data);
+      $response = $this->model->CreateUserLog($data);
 
-    header("Location: Inicio?msn=$response");
-}
-
-  public function index(){
-
-
-    if(!isset($_SESSION["user"])){
-       header("location: index.php?c=auth&a=login ");
-    }else{
-      header("Location: ?c=admin&a=ReadUser");
+      header("Location: Inicio?msn=$response");
     }
 
-  }
+    //Vista de la pagina principal del sistema
 
-  public function registerGuest(){
+    public function index(){
+      if(!isset($_SESSION["user"])){
+        header("location: index.php?c=auth&a=login ");
+      }else{
+        header("Location: ?c=admin&a=ReadUser");
+      }
+    }
 
+    //Vista del formulario de registro
+
+    public function registerGuest(){
       require_once 'view/include/header.php';
       require_once 'view/modules/auth/register.php';
       require_once 'view/include/footer.php';
   }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Modulo de usuario
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //                                                                                                            //
+  //                                          MODULO DE USUARIO                                                 //
+  //                                                                                                            //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Funcion para ver el formulario de registro de usuarios en el sistema
 
     public function User(){
       if(!isset($_SESSION["user"])){
@@ -67,6 +80,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para ver los registros de los usuarios en el sistema
+
     public function ReadUser(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -77,6 +92,8 @@ public function CreateUserLog(){
         require_once 'view/include/footer.php';
       }
     }
+
+    //Funcion para ver el detalle de los usuarios registrados en el sistema
 
     public function DetalleUser(){
       if(!isset($_SESSION["user"])){
@@ -90,6 +107,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para actualizar un usuario determinado en el sistema
+
     public function UpdateUser(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -99,6 +118,8 @@ public function CreateUserLog(){
         header("Location: ?c=admin&a=readUser&msn=$result");
       }
     }
+
+    //Funcion para registrar un usuario en el sistema
 
     public function CreateUser(){
       if(!isset($_SESSION["user"])){
@@ -110,6 +131,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para eliminar usuarios determinados en el sistema
+
     public function DeleteUser(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -120,9 +143,13 @@ public function CreateUserLog(){
       }
     }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                           MODULO DE EQUPO                                                  //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // Modulo de equipo
+    //Funcion para ver el formulario de registro de los equipos en el sistema
 
     Public function Equipo(){
       if(!isset($_SESSION["user"])){
@@ -134,6 +161,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para registrar equipos en el sistema
+
     public function CreateEqui(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -143,6 +172,8 @@ public function CreateUserLog(){
         header("Location: ?c=admin&a=equipo&msn=$result");
       }
     }
+
+    //Funcion para ver los registros de los equipos en el sistema
 
     public function ReadEqui(){
       if(!isset($_SESSION["user"])){
@@ -154,6 +185,8 @@ public function CreateUserLog(){
         require_once 'view/include/footer.php';
       }
     }
+
+    //Funcion para ver todos los detalles del equipo en el sistema
 
     public function DetalleEqui(){
       if(!isset($_SESSION["user"])){
@@ -167,6 +200,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para actualizar un equipo determinado en el sistema
+
     public function UpdateEqui(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -176,6 +211,8 @@ public function CreateUserLog(){
         header("Location: ?c=admin&a=ReadEqui&msn=$result");
       }
     }
+
+    //Funcion para eliminar equipos determindos en el sistema
 
     public function DeleteEqui(){
       if(!isset($_SESSION["user"])){
@@ -187,9 +224,13 @@ public function CreateUserLog(){
       }
     }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                          MODULO DE ASIGNACION                                              //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // Modulo de asigancion
+    //Funcion para ver el formulario de registro de asignaciones en el sistema
 
     public function Asignacion(){
       if(!isset($_SESSION["user"])){
@@ -201,6 +242,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para registrar asignaciones en el sistema
+
     public function CreateAsig(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -210,6 +253,8 @@ public function CreateUserLog(){
         header("Location: ?c=admin&a=Asignacion&msn=$result");
       }
     }
+
+    //Funcion para ver los registros de asignaciones en el sistema
 
     public function ReadAsig(){
       if(!isset($_SESSION["user"])){
@@ -221,6 +266,8 @@ public function CreateUserLog(){
         require_once 'view/include/footer.php';
       }
     }
+
+    //Funcion para ver la asignacion de determinado equipo en el sistema
 
     public function SearchAsig(){
       if(!isset($_SESSION["user"])){
@@ -234,9 +281,13 @@ public function CreateUserLog(){
       }
     }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                        MODULO DE DEVOLUCION                                                //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // Modulo de devolucion
+    //Funcion para ver el formulario de devoluciones en el sistema
 
     public function ReadDev(){
       if(!isset($_SESSION["user"])){
@@ -250,6 +301,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para realizar devoluciones en el sistema
+
     public function CreateDev(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -259,6 +312,8 @@ public function CreateUserLog(){
         header("Location: ?c=admin&a=ReadAsig&msn=$result");
       }
     }
+
+    //Funcion para ver los registros de devoluciones en el sistema
 
     public function ReadHis(){
       if(!isset($_SESSION["user"])){
@@ -271,6 +326,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para eliminar devoluciones determinadas en el sistema
+
     public function DeleteDev(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -281,9 +338,13 @@ public function CreateUserLog(){
       }
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                      MODULO ADMINISTRAR LISTAS                                             //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //Modulo de administrar listas
+    //Funcion para ver los sites en el sistema
 
     public function AdminSite(){
       if(!isset($_SESSION["user"])){
@@ -296,6 +357,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para registrar sites en el sistema
+
     public function CreateSite(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -306,6 +369,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para eliminar sites en el sistema
+
     public function DeleteSite(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -315,6 +380,8 @@ public function CreateUserLog(){
         header("Location: ?c=admin&a=AdminSite&msn=$result");
       }
     }
+
+    //Funcion para ver las areas en el sistema
 
     public function AdminArea(){
       if(!isset($_SESSION["user"])){
@@ -327,6 +394,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para registrar areas en el sistema
+
     public function CreateArea(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -337,6 +406,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para eliminar areas en el sistema
+
     public function DeleteArea(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -346,6 +417,8 @@ public function CreateUserLog(){
         header("Location: ?c=admin&a=AdminArea&msn=$result");
       }
     }
+
+    //Funcion para ver cargos en el sistema
 
     public function AdminCargo(){
       if(!isset($_SESSION["user"])){
@@ -358,6 +431,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para registrar cargos en el sistema
+
     public function CreateCargo(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -368,6 +443,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para eliminar cargos en el sistema
+
     public function DeleteCargo(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -377,6 +454,8 @@ public function CreateUserLog(){
         header("Location: ?c=admin&a=AdminCargo&msn=$result");
       }
     }
+
+    //Funcion para ver tipos de equipos en el sistema
 
     public function AdminTipo(){
       if(!isset($_SESSION["user"])){
@@ -389,6 +468,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para registrar tipos de equipos en el sistema
+
     public function CreateTipo(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -399,6 +480,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para elimiar tipos de equipos en el sistema
+
     public function DeleteTipo(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -408,6 +491,8 @@ public function CreateUserLog(){
         header("Location: ?c=admin&a=AdminTipo&msn=$result");
       }
     }
+
+    //Funcion para ver marcas de equipos en el sistema
 
     public function AdminMarca(){
       if(!isset($_SESSION["user"])){
@@ -420,6 +505,8 @@ public function CreateUserLog(){
       }
     }
 
+    //Funcion para registrar marcas de equipos en el sistema
+
     public function CreateMarca(){
       if(!isset($_SESSION["user"])){
          header("location: index.php?c=auth&a=login ");
@@ -429,6 +516,8 @@ public function CreateUserLog(){
         header("Location: ?c=admin&a=AdminMarca&msn=$result");
       }
     }
+
+    //Funcion para eliminar marcas de equipos en el sistema
 
     public function DeleteMarca(){
       if(!isset($_SESSION["user"])){
@@ -440,7 +529,28 @@ public function CreateUserLog(){
       }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                      MODULO DE RECUPERAR CONTRASEÑA                                        //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Funcion para ver el formulario de recuperar contraseña
+
+    public function Clave(){
+      require_once 'view/include/header.php';
+      require_once 'view/modules/auth/recuperar.php';
+      require_once 'view/include/footer.php';
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                       MODULO DE CERRAR SESION                                              //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     // Metodo para cerrar sesion
+
     public function logout(){
         session_destroy();
         header("Location: Inicio");

@@ -7,27 +7,15 @@ body{
   font-size: 12px;
 }
 
-#login, #registro{
+#login, #registro, #filas{
   border-radius: 10px;
   background-color: white;
   margin-top: 20px;
   border-radius: 10px;
 }
 
-#btnReg, #btnCanc{
+#btnReg, #btnCanc, #btnRegis, #btnRecuperar, #btnSend{
   margin-bottom: 30px;
-}
-
-#btnRegis{
-  margin-left: 20px;
-  margin-bottom: 30px;
-}
-
-#filas{
-  border-radius: 10px;
-  background-color: white;
-  margin-left: 15px;
-  margin-right: 15px;
 }
 
 #btn{

@@ -15,8 +15,10 @@
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //LOGIN
+    //                                                                                                            //
+    //                                                LOGIN                                                       //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public function CreateUserLog($data){
       try{
@@ -62,9 +64,31 @@
    		return $result;
    	}
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public function RecoverPass(){
+      $mail= new PHPMailer(true);
 
-    // CRUD Usuario
+      try {
+        $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'smtp1.example.com;smtp2.example.com';  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'user@example.com';                 // SMTP username
+        $mail->Password = 'secret';                           // SMTP password
+        $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 465;                                    // TCP port to connect to
+
+      } catch (Exception $e) {
+        echo 'El mensaje no pudo ser enviado.';
+        echo 'Error de mail: ' . $mail->ErrorInfo;
+      }
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                               CRUD USUARIO                                                 //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Función para buscar usuarios.
 
