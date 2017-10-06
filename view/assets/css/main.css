@@ -14,12 +14,7 @@ body{
   border-radius: 10px;
 }
 
-#btnReg, #btnCanc{
-  margin-bottom: 30px;
-}
-
-#btnRegis{
-  margin-left: 20px;
+#btnReg, #btnCanc, #btnRegis{
   margin-bottom: 30px;
 }
 
