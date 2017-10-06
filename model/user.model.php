@@ -75,6 +75,32 @@
         return $result;
       }
 
+      public function ReadPass($data){
+        $sql= "SELECT * FROM users WHERE user_email= :mail ";
+        $query= $this->pdo->prepare($sql);
+        $query->bindValue(":mail",$data[0]);
+        $query->execute();
+        $mail= $query->rowCount();
+
+        if($mail==false){
+          $msn= "El correo no existe en el sistema";
+
+          return $msn;
+        }else{
+          try {
+            $sql= "SELECT access.acc_pass FROM access INNER JOIN users ON (access.user_id = users.user_id) WHERE users.user_email= :mail ";
+            $query= $this->pdo->prepare($sql);
+            $query->bindValue(":mail",$data[0]);
+            $query->execute();
+            $result= $query->fetchAll(PDO::FETCH_BOTH);
+
+          }catch(PDOException $e) {
+            die($e->getMessage());
+          }
+            return $result;
+          }
+        }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // CRUD Usuario

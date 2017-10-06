@@ -14,7 +14,7 @@ body{
   border-radius: 10px;
 }
 
-#btnReg, #btnCanc, #btnRegis{
+#btnReg, #btnCanc, #btnRegis, #btnRecuperar, #pass{
   margin-bottom: 30px;
 }
 
