@@ -18,7 +18,7 @@
 
       </form>
 
-      <a href="Registro" id="btnRegis" class="btn blue-grey darken-2 col s5">Registrarse</a>
+      <a href="Registro" id="btnRegis" class="btn blue-grey darken-2 col s5 offset-s1">Registrarse</a>
 
   </div>
 </div>
