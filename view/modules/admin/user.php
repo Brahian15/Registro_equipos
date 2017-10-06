@@ -58,7 +58,7 @@
       </div>
 
       <div class="input-field col s4">
-        <select name="data[]" required>
+        <select name="data[]">
           <option disabled selected>Seleccione el site</option>
           <?php $this->load->LoadSite();?>
         </select>
@@ -66,7 +66,7 @@
       </div>
 
       <div class="input-field col s4 offset-s2">
-        <select name="data[]" required>
+        <select name="data[]">
           <option disabled selected>Seleccione el area</option>
           <?php $this->load->LoadArea(); ?>
         </select>
@@ -74,7 +74,7 @@
       </div>
 
       <div class="input-field col s4">
-        <select name="data[]" required>
+        <select name="data[]">
           <option disabled selected>Seleccion el cargo</option>
           <?php $this->load->LoadCargo(); ?>
         </select>

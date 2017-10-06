@@ -116,9 +116,5 @@
 
 2017-09-29 12:23:25 -- Error del Sistema: # 42S22 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_lastname' in 'field list' En el archivo C:\xampp\htdocs\Registro_equipos\model\user.model.php --> 50
 
-2017-10-06 10:17:14 -- Error del Sistema: # 21S01 SQLSTATE[21S01]: Insert value list does not match column list: 1136 Column count doesn't match value count at row 1 En el archivo C:\xampp\htdocs\Registro_equipos\model\user.model.php --> 26
 
-2017-10-06 10:18:04 -- Error del Sistema: # 21S01 SQLSTATE[21S01]: Insert value list does not match column list: 1136 Column count doesn't match value count at row 1 En el archivo C:\xampp\htdocs\Registro_equipos\model\user.model.php --> 26
-
-2017-10-06 10:18:25 -- Error del Sistema: # 21S01 SQLSTATE[21S01]: Insert value list does not match column list: 1136 Column count doesn't match value count at row 1 En el archivo C:\xampp\htdocs\Registro_equipos\model\user.model.php --> 26
 

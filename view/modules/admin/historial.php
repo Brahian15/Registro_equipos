@@ -75,7 +75,9 @@
             <td><?php echo $row['ser']; ?></td>
             <td><?php echo $row['ced']; ?></td>
             <td><?php echo $row['coment']; ?></td>
-            <td><a href="?id=<?php echo $row['no_dev'];?>&c=admin&a=DeleteDev" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar devolución" onclick="return confirm('¿Desea eliminar la devolución permanentemente?')"><i class="small material-icons">delete</i></a></td>
+            <?php if($_SESSION["user"]["rol"] == "1"){ ?>
+              <td><a href="?id=<?php echo $row['no_dev'];?>&c=admin&a=DeleteDev" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar devolución" onclick="return confirm('¿Desea eliminar la devolución permanentemente?')"><i class="small material-icons">delete</i></a></td>
+            <?php } ?>
           </tr>
         </tbody>
 
@@ -97,7 +99,9 @@
           <th>Serial</th>
           <th>DUI</th>
           <th>Comentarios</th>
+          <?php if($_SESSION["user"]["rol"] == "1"){ ?>
           <th>Acción</th>
+          <?php } ?>
         </tr>
       </thead>
       <?php foreach($result as $data){ ?>
@@ -109,7 +113,9 @@
             <td><?php echo $data->ser; ?></td>
             <td><?php echo $data->ced; ?></td>
             <td><?php echo $data->coment; ?></td>
-            <td><a href="?id=<?php echo $data->no_dev?>&c=admin&a=DeleteDev" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar devolución" onclick="return confirm('¿Desea eliminar la devolucón permanentemente?')"><i class="small material-icons">delete</i></a></td>
+            <?php if($_SESSION["user"]["rol"] == "1"){ ?>
+              <td><a href="?id=<?php echo $data->no_dev?>&c=admin&a=DeleteDev" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar devolución" onclick="return confirm('¿Desea eliminar la devolucón permanentemente?')"><i class="small material-icons">delete</i></a></td>
+            <?php } ?>
           </tr>
         </tbody>
       <?php } ?>

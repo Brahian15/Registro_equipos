@@ -81,7 +81,9 @@
           <td><?php echo $row['estado']; ?></td>
           <td><a href="?detalle=<?php echo $row['ser'];?>&c=admin&a=DetalleEqui" class="btn blue-grey darken-2 tooltiped" data-position="left" data-tooltip="Detalle del equipo"><i class="small material-icons">assignment</i></a></td>
           <td><a href="?serial=<?php echo $row['ser'];?>&c=admin&a=SearchAsig" class="btn blue-grey darken-2 tooltiped" data-position="top" data-tooltip="Asignación del equipo"><i class="small material-icons">assignment_late</i></a></td>
-          <td><a href="?id=<?php echo $row['ser'];?>&c=admin&a=DeleteEqui" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar equipo" onclick="return confirm('¿Desea eliminar el equipo permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <?php if($_SESSION["user"]["rol"] == "1"){ ?>
+            <td><a href="?id=<?php echo $row['ser'];?>&c=admin&a=DeleteEqui" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar equipo" onclick="return confirm('¿Desea eliminar el equipo permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <?php } ?>
         </tr>
       </tbody>
 
@@ -119,7 +121,9 @@
           <td><?php echo $data->estado; ?></td>
           <td><a href="?detalle=<?php echo $data->ser?>&c=admin&a=DetalleEqui" class="btn blue-grey darken-2 tooltiped" data-position="left" data-tooltip="Detalle del equipo"><i class="small material-icons">assignment</i></a></td>
           <td><a href="?serial=<?php echo $data->ser;?>&c=admin&a=SearchAsig" class="btn blue-grey darken-2 tooltiped" data-position="top" data-tooltip="Asignación del equipo"><i class="small material-icons">assignment_late</i></a></td>
-          <td><a href="?id=<?php echo $data->ser?>&c=admin&a=DeleteEqui" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar equipo" onclick="return confirm('¿Desea eliminar el equipo permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <?php if($_SESSION["user"]["rol"] == "1"){ ?>
+            <td><a href="?id=<?php echo $data->ser?>&c=admin&a=DeleteEqui" class="btn blue-grey darken-2 tooltiped" data-position="right" data-tooltip="Eliminar equipo" onclick="return confirm('¿Desea eliminar el equipo permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <?php } ?>
         </tr>
       </tbody>
     <?php  } ?>
