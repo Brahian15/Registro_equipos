@@ -14,13 +14,11 @@
           <label for="txtpass">Contraseña</label>
         </div>
 
-        <button id="btnLogin" type="submit" class="btn waves-effect waves-light blue darken-3 col s6">Iniciar sesion</button>
+        <button type="submit" class="btn waves-effect waves-light blue darken-3 col s6" id="btnLogin">Iniciar sesion</button>
 
       </form>
 
-      <a id="btnRegis" href="Registro" class="btn blue-grey darken-2 col s5">Registrarse</a>
-
-      <a id="btnRecuperar" href="?c=admin&a=Clave" class="btn blue-grey darken-2 col s12">Recuperar contraseña</a>
+      <a href="Registro" id="btnRegis" class="btn blue-grey darken-2 col s5">Registrarse</a>
 
   </div>
 </div>

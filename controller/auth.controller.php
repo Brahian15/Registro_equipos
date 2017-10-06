@@ -55,7 +55,6 @@ class AuthController{
        $_SESSION["user"]["name"]  = $userData["user_name"];
        $_SESSION["user"]["lastn"] = $userData["user_lastname"];
        $_SESSION["user"]["email"] = $_POST["email"];
-       $_SESSION["user"]["rol"]   = $userData["no_rol"];
 
     }else{
        // $this->users->updateUserFail($data[0]);
