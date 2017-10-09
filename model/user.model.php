@@ -44,7 +44,6 @@
 
      public function readUserbyEmail($data){
    			try{
-
    				$sql = "SELECT users.user_id, users.user_name, users.user_lastname, access.acc_token, access.acc_pass, rol.no_rol FROM users INNER JOIN access ON (users.user_id = access.user_id) INNER JOIN rol ON (users.no_rol = rol.no_rol) WHERE user_email = ?";
    				$query = $this->pdo->prepare($sql);
    				$query->execute(array($data[0]));
@@ -92,7 +91,7 @@
             $query= $this->pdo->prepare($sql);
             $query->bindValue(":mail",$data[0]);
             $query->execute();
-            $result= $query->fetchAll(PDO::FETCH_BOTH);
+            $result= $query->fetchAll(PDO::FETCH_OBJ);
 
           }catch(PDOException $e) {
             die($e->getMessage());

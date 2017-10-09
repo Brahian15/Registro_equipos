@@ -1,11 +1,13 @@
 <div class="row" id="pg-inicio">
   <div id="login" class="z-depth-4 center col m4 offset-m4">
-      <form id="frmLogin" method="post" data-parsley-validate>
+      <form id="" method="post" data-parsley-validate>
         <div class="card-panel blue darken-3">
           <h3 class="center-align">RECORDAR CONTRASEÑA</h3>
         </div>
-
-          <label id="pass">Su contraseña es: <?php echo $data['acc_pass']; ?></label>
+        <div class="input-field col s12">
+          <input type="text" name="data[]" value="<?php echo $result ?>">
+          <label id="pass">Su contraseña es: </label>
+        </div>
 
       </form>
 

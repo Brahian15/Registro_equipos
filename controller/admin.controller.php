@@ -30,7 +30,6 @@
       // Indice5 = token
       // Indice6 = status
 
-      $data[4] = password_hash($data[4], PASSWORD_DEFAULT);
       $data[5] = "USU-".date('Ymd').'-'.date('hms');
       $data[6] = randAlphanum(50);
       $data[7] = "Inactivo";
@@ -540,12 +539,16 @@
       require_once 'view/include/footer.php';
     }
 
-    public function Password(){
+    public function Pass(){
       require_once 'view/include/header.php';
-      $data= $_POST['data'];
-      $result= $this->model->ReadPass($data);
       require_once 'view/modules/auth/password.php';
       require_once 'view/include/footer.php';
+    }
+
+    public function Password(){
+      $data[0]= $_POST["data"];
+      $result= $this->model->readuserbyEmail($data);
+      header("Location: ?c=admin&a=Pass");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

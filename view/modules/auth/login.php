@@ -5,12 +5,12 @@
           <h3 class="center-align">INICIAR SESION</h3>
         </div>
         <div class="input-field col s12">
-          <input  id="txtemail" type="email" class="validate" name="data[]" required="required" autofocus>
+          <input  id="txtemail" type="email" class="validate" name="email" required="required" autofocus>
           <label for="txtemail">Correo Electronico</label>
          </div>
 
         <div class="input-field col s12">
-          <input  id="txtpass" type="password" class="validate" name="data[]" required="required">
+          <input  id="txtpass" type="password" class="validate" name="pass" required="required">
           <label for="txtpass">Contraseña</label>
         </div>
 

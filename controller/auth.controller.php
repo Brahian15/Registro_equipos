@@ -46,7 +46,7 @@ class AuthController{
     $userData = $this->users->readUserbyEmail($data);
 
 
-    if(password_verify($data[1],$userData["acc_pass"])){
+    if($userData["acc_pass"]==$data[1]){
        $return = array(true,"Bienvenido al Sistema");
 
        //  Creamos las variables de Sesion
@@ -58,7 +58,6 @@ class AuthController{
        $_SESSION["user"]["rol"]   = $userData["no_rol"];
 
     }else{
-       // $this->users->updateUserFail($data[0]);
        $return = array(false,"La contraseña no es la correcta");
     }
 

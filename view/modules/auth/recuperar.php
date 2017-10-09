@@ -1,6 +1,6 @@
 <div class="row" id="pg-inicio">
   <div id="login" class="z-depth-4 center col m4 offset-m4">
-      <form id="frmLogin" action="" method="post" data-parsley-validate>
+      <form id="frmLogin" action="?c=admin&a=Password" method="post" data-parsley-validate>
         <div class="card-panel blue darken-3">
           <h3 class="center-align">RECORDAR CONTRASEÑA</h3>
         </div>
@@ -9,7 +9,7 @@
           <label for="txtemail">Correo Electronico</label>
         </div>
 
-        <a id="btnSend" href="?c=admin&a=Password" type="submit" class="btn waves-effect waves-light blue darken-3 col s6">Enviar</a>
+        <button id="btnSend" type="submit" class="btn waves-effect waves-light blue darken-3 col s6">Enviar</button>
 
       </form>
 
