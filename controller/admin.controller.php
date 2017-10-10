@@ -546,9 +546,16 @@
     }
 
     public function Password(){
-      $data[0]= $_POST["data"];
-      $result= $this->model->readuserbyEmail($data);
-      header("Location: ?c=admin&a=Pass");
+      $data= $_POST["data"];
+      $result= $this->model->ReadPass($data);
+      // header("Location: ?c=admin&a=Pass");
+      // if($result["user_email"]==$data){
+      //   $msn= "El correo no existe en el sistema";
+      //
+      //   return $msn;
+      // }
+
+      echo $result["user_email"];
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
