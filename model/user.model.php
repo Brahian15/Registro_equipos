@@ -76,16 +76,24 @@
 
       public function ReadPass($data){
         try{
-        $sql= "SELECT * FROM access INNER JOIN users ON (access.user_id = users.user_id) WHERE users.user_email = ? ";
+          $sql= "SELECT * FROM access INNER JOIN users ON (access.user_id = users.user_id) WHERE users.user_email = ? ";
           $query= $this->pdo->prepare($sql);
           $query->execute(array($data));
           $result = $query->fetch(PDO::FETCH_BOTH);
 
-          }catch(PDOException $e) {
-            die($e->getMessage());
+          if($result["user_email"]<>$data){
+            $msn= "El correo no existe en el sistema";
+            header("Location: ?c=admin&a=Clave&msn=$msn");
+
+          }else{
+            header("Location: ?c=admin&a=Pass");
+            return $result;
+
           }
-          return $result;
+        }catch(PDOException $e) {
+          die($e->getMessage());
         }
+      }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
