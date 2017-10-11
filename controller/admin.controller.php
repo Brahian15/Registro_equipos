@@ -548,6 +548,11 @@
     public function Password(){
       $data= $_POST["data"];
       $result= $this->model->ReadPass($data);
+      require_once 'view/include/header.php';
+      require_once 'view/modules/auth/password.php';
+      require_once 'view/include/footer.php';
+
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

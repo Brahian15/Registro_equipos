@@ -81,18 +81,20 @@
           $query->execute(array($data));
           $result = $query->fetch(PDO::FETCH_BOTH);
 
-          if($result["user_email"]<>$data){
-            $msn= "El correo no existe en el sistema";
-            header("Location: ?c=admin&a=Clave&msn=$msn");
+          // if($result["user_email"]<>$data){
+          //   $msn= "El correo no existe en el sistema";
+          //   header("Location: ?c=admin&a=Clave&msn=$msn");
 
-          }else{
-            header("Location: ?c=admin&a=Pass");
-            return $result;
+          // }else{
+          //   header("Location: ?c=admin&a=Pass");
+          //   return $result;
 
-          }
+          // }
         }catch(PDOException $e) {
           die($e->getMessage());
         }
+
+        return $result;
       }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

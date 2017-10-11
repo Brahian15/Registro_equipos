@@ -5,7 +5,7 @@
           <h3 class="center-align">RECORDAR CONTRASEÑA</h3>
         </div>
         <div class="input-field col s12">
-          <input type="text" name="data[]" value="<?php echo $result->user_email; ?>">
+          <input type="text" name="data[]" value="<?php echo $result['acc_pass']  ?>  ">
           <label id="pass">Su contraseña es: </label>
         </div>
 
