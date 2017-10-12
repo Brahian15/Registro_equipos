@@ -38,7 +38,7 @@
     <h3>Registro de equipos</h3>
 
     <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" class="validate" required autofocus>
+      <input type="text" name="data[]" class="validate" required="required" autofocus>
       <label>Serial</label>
     </div>
 
@@ -59,42 +59,42 @@
     </div>
 
     <div class="input-field col s4">
-      <input type="text" name="data[]" class="validate" required>
+      <input type="text" name="data[]" class="validate" required="required">
       <label>Modelo</label>
     </div>
 
     <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" class="validate" required>
+      <input type="text" name="data[]" class="validate" required="required">
       <label>Memoria</label>
     </div>
 
     <div class="input-field col s4">
-      <input type="text" name="data[]" class="validate" required>
+      <input type="text" name="data[]" class="validate" required="required">
       <label>Disco duro</label>
     </div>
 
     <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" class="validate" required>
+      <input type="text" name="data[]" class="validate" required="required">
       <label>Procesador</label>
     </div>
 
     <div class="input-field col s4">
-      <input type="text" name="data[]" class="validate" required>
+      <input type="text" name="data[]" class="validate" required="required">
       <label>Sistema operativo</label>
     </div>
 
     <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" class="validate" required>
+      <input type="text" name="data[]" class="validate" required="required">
       <label>Type</label>
     </div>
 
     <div class="input-field col s4">
-      <input type="text" name="data[]" class="validate" required>
+      <input type="text" name="data[]" class="validate" required="required">
       <label>Consecutivo inventario</label>
     </div>
 
     <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" class="validate" required>
+      <input type="text" name="data[]" class="validate" required="required">
       <label>Hostname</label>
     </div>
 

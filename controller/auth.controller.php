@@ -9,11 +9,15 @@ class AuthController{
     $this->users = new UserModel();
   }
 
+  //Funcion de vista del site
+
   public function login(){
      require_once 'view/include/header.php';
      require_once 'view/modules/auth/login.php';
      require_once 'view/include/footer.php';
   }
+
+  //FUncion para validar existencia de correo
 
   public function validEmail(){
       $email[0] = $_POST["email"];
@@ -27,6 +31,8 @@ class AuthController{
       echo json_encode($return);
   }
 
+  //Funcion para verificar existencia de correo
+
   public function notFoundMail(){
     $email[0]= $_POST["email"];
     $result = $this->users->readUserbyEmail($email);
@@ -38,6 +44,8 @@ class AuthController{
     }
     echo json_encode($return);
     }
+
+  //Funcion de iniciar sesion
 
   public function userAuth(){
     $data[0] = $_POST["email"];

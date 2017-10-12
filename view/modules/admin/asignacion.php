@@ -43,12 +43,12 @@
   </div>
 
   <div class="input-field col s4 offset-s2">
-    <input type="text" name="data[]" class="validate" required autofocus>
+    <input type="text" name="data[]" class="validate" required="required" autofocus>
     <label>Serial</label>
   </div>
 
   <div class="input-field col s4">
-    <input type="text" name="data[]" class="validate" required>
+    <input type="text" name="data[]" class="validate" required="required">
     <label>DUI</label>
   </div>
 

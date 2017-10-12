@@ -539,11 +539,7 @@
       require_once 'view/include/footer.php';
     }
 
-    public function Pass(){
-      require_once 'view/include/header.php';
-      require_once 'view/modules/auth/password.php';
-      require_once 'view/include/footer.php';
-    }
+    //Funcion para ver la contraseña en pantalla
 
     public function Password(){
       $data= $_POST["data"];
@@ -551,8 +547,6 @@
       require_once 'view/include/header.php';
       require_once 'view/modules/auth/password.php';
       require_once 'view/include/footer.php';
-
-
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

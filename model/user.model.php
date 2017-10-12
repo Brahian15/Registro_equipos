@@ -15,8 +15,12 @@
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                                LOGIN                                                       //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //LOGIN
+    //Funcion para crear el usuario y el sistema de logueo
 
     public function CreateUserLog($data){
       try{
@@ -42,6 +46,8 @@
  				return $msn;
  		 }
 
+     //Funcion para verificar si el correo ingresado si existe
+
      public function readUserbyEmail($data){
    			try{
    				$sql = "SELECT users.user_id, users.user_name, users.user_lastname, access.acc_token, access.acc_pass, rol.no_rol FROM users INNER JOIN access ON (users.user_id = access.user_id) INNER JOIN rol ON (users.no_rol = rol.no_rol) WHERE user_email = ?";
@@ -61,45 +67,42 @@
    		return $result;
    	}
 
-      public function ReadRol(){
-        try {
-          $sql= "SELECT * FROM rol";
-          $query= $this->pdo->prepare($sql);
-          $query->execute();
-          $result= $query->fetchAll(PDO::FETCH_BOTH);
+    //Funcion para enviar al formulario de registro los roles registrados
 
-        }catch(PDOException $e){
-          die($e->getMessage());
-        }
-        return $result;
+    public function ReadRol(){
+      try {
+        $sql= "SELECT * FROM rol";
+        $query= $this->pdo->prepare($sql);
+        $query->execute();
+        $result= $query->fetchAll(PDO::FETCH_BOTH);
+
+      }catch(PDOException $e){
+        die($e->getMessage());
+      }
+      return $result;
+    }
+
+    //Funcion para ver la contraseña de un usuario determinado
+
+    public function ReadPass($data){
+      try{
+        $sql= "SELECT * FROM access INNER JOIN users ON (access.user_id = users.user_id) WHERE users.user_email = ? ";
+        $query= $this->pdo->prepare($sql);
+        $query->execute(array($data));
+        $result = $query->fetch(PDO::FETCH_BOTH);
+
+      }catch(PDOException $e) {
+        die($e->getMessage());
       }
 
-      public function ReadPass($data){
-        try{
-          $sql= "SELECT * FROM access INNER JOIN users ON (access.user_id = users.user_id) WHERE users.user_email = ? ";
-          $query= $this->pdo->prepare($sql);
-          $query->execute(array($data));
-          $result = $query->fetch(PDO::FETCH_BOTH);
-
-          // if($result["user_email"]<>$data){
-          //   $msn= "El correo no existe en el sistema";
-          //   header("Location: ?c=admin&a=Clave&msn=$msn");
-
-          // }else{
-          //   header("Location: ?c=admin&a=Pass");
-          //   return $result;
-
-          // }
-        }catch(PDOException $e) {
-          die($e->getMessage());
-        }
-
-        return $result;
-      }
+      return $result;
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // CRUD Usuario
+    //                                                                                                            //
+    //                                            CRUD USUARIO                                                    //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Función para buscar usuarios.
 
@@ -442,9 +445,11 @@
       }
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// CRUD Equipo
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                            CRUD EQUIPO                                                     //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //Función para buscar los equipos registrados.
 
@@ -705,9 +710,11 @@
       }
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // CRUD Asignacion
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                           CRUD ASIGNACION                                                  //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Funcion para buscar una asignacion ya creada.
 
@@ -723,6 +730,8 @@
       }
       return $data;
     }
+
+    //Funcion para ver asignaciones dependiendo del equipo seleccionado
 
     public function SearchAsigbyEqui($serial){
       try {
@@ -817,9 +826,11 @@
     }
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // CRUD Devolución
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                              CRUD DEVOLUCIONES                                             //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Función para leer las devoluciones ya creadas.
 
@@ -909,7 +920,13 @@
       return $result=$msn;
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                         FUNCION CERRAR SESION                                              //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Funcion para cerrar la sesion del usuario que esta logueado en el momento
 
     public function __DESTRUCT(){
       try {

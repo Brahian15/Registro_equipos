@@ -38,22 +38,22 @@
       <h3>Registro de usuarios</h3>
 
       <div class="input-field col s8 offset-s2">
-        <input type="text" name="data[]" class="validate" required autofocus>
+        <input type="text" name="data[]" class="validate" required="required" autofocus>
         <label>DUI</label>
       </div>
 
       <div class="input-field col s4 offset-s2">
-        <input type="text" name="data[]" required>
+        <input type="text" name="data[]" class="validate" required="required">
         <label>VHUR</label>
       </div>
 
       <div class="input-field col s4">
-        <input name="data[]" type="text" class="validate" required>
+        <input name="data[]" type="text" class="validate" required="required">
         <label>Nombre completo</label>
       </div>
 
-      <div class="input-field col s4 offset-s2" required>
-        <input type="text" name="data[]" class="validate" required>
+      <div class="input-field col s4 offset-s2">
+        <input type="text" name="data[]" class="validate" required="required">
         <label>Teléfono</label>
       </div>
 

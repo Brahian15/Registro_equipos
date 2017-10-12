@@ -56,42 +56,42 @@
   </div>
 
   <div class="input-field col s4">
-    <input type="text" name="data[]" value="<?php echo $data->model; ?>">
+    <input type="text" name="data[]" value="<?php echo $data->model; ?>" required="required">
     <label>Modelo</label>
   </div>
 
   <div class="input-field col s4 offset-s2">
-    <input type="text" name="data[]" value="<?php echo $data->memo?>">
+    <input type="text" name="data[]" value="<?php echo $data->memo?>" required="required">
     <label>Memoria</label>
   </div>
 
   <div class="input-field col s4">
-    <input type="text" name="data[]" value="<?php echo $data->disc_duro; ?>">
+    <input type="text" name="data[]" value="<?php echo $data->disc_duro; ?>" required="required">
     <label>Disco duro</label>
   </div>
 
   <div class="input-field col s4 offset-s2">
-    <input type="text" name="data[]" value="<?php echo $data->procesador; ?>">
+    <input type="text" name="data[]" value="<?php echo $data->procesador; ?>" required="required">
     <label>Procesador</label>
   </div>
 
   <div class="input-field col s4">
-    <input type="text" name="data[]" value="<?php echo $data->sis_operativo; ?>">
+    <input type="text" name="data[]" value="<?php echo $data->sis_operativo; ?>" required="required">
     <label>Sistema operativo</label>
   </div>
 
   <div class="input-field col s4 offset-s2">
-    <input type="text" name="data[]" value="<?php echo $data->type; ?>">
+    <input type="text" name="data[]" value="<?php echo $data->type; ?>" required="required">
     <label>Type</label>
   </div>
 
   <div class="input-field col s4">
-    <input type="text" name="data[]" value="<?php echo $data->cons_inventario; ?>">
+    <input type="text" name="data[]" value="<?php echo $data->cons_inventario; ?>" required="required">
     <label>Consecutivo inventario</label>
   </div>
 
   <div class="input-field col s4 offset-s2">
-    <input type="text" name="data[]" value="<?php echo $data->hostname; ?>">
+    <input type="text" name="data[]" value="<?php echo $data->hostname; ?>" required="required">
     <label>Hostname</label>
   </div>
 
