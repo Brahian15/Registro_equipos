@@ -190,7 +190,7 @@
 
     public function UpdateUser($data){
       try {
-        $sql = "UPDATE usuario SET vhur= '$data[1]', nom= '$data[2]', tel= '$data[3]', no_site= '$data[4]', no_area= '$data[5]', no_cargo= '$data[6]' WHERE ced= :numero_user";
+        $sql = "UPDATE usuario SET vhur= '$data[1]', nom= '$data[2]', tel= '$data[3]' WHERE ced= :numero_user";
         $query = $this->pdo->prepare($sql);
         $query->bindValue(":numero_user",$data[0]);
         $query->execute();
