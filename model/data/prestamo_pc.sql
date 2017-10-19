@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-09-2017 a las 17:16:30
+-- Tiempo de generación: 19-10-2017 a las 22:39:49
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -36,15 +36,6 @@ CREATE TABLE `access` (
   `acc_status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `access`
---
-
-INSERT INTO `access` (`acc_token`, `user_id`, `acc_pass`, `acc_failed_att`, `acc_status`) VALUES
-('3SPBj58gMZzsZaosyjXxaJ1dHlp8w4BbwIv2tIAeYH9wkpTMJf', 'USU-20170926-100930', '$2y$10$YXQelcwlOZRuKAhAECEvVergEBy.mlKRjOoVeFJJDOn2jvm8cnev.', 0, 'Inactivo'),
-('EG28PtPzxWdhNCCeWETMaBxgONfyd7NK1YcQxdvwBASsLqVAuE', 'USU-20170926-040955', '$2y$10$kPQecCVV37nW8l1uKldHtur/hksxFvCd.sqOaGgywLjmJ5.S/cCYS', 0, 'Inactivo'),
-('MPz7n2TcpZuB4RI7iozQp9cCIwA9Hrx7gP0xLUbHeHpbRWAyWo', 'USU-20170927-090904', '$2y$10$VhGHXuMe0iOb13JOiFkdj..ioV0HckjUZQpioUonSPL23RWHf648O', 0, 'Inactivo');
-
 -- --------------------------------------------------------
 
 --
@@ -54,9 +45,8 @@ INSERT INTO `access` (`acc_token`, `user_id`, `acc_pass`, `acc_failed_att`, `acc
 CREATE TABLE `asignacion` (
   `no_asig` int(11) NOT NULL,
   `fec_asig` date NOT NULL,
-  `tipo_asig` varchar(30) NOT NULL,
   `ser` varchar(100) NOT NULL,
-  `ced` int(11) NOT NULL,
+  `ced` bigint(20) NOT NULL,
   `user_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -83,22 +73,9 @@ CREATE TABLE `devolucion` (
   `fec_dev` date NOT NULL,
   `ser` varchar(100) NOT NULL,
   `ced` int(11) NOT NULL,
-  `no_asig` int(11) NOT NULL
+  `no_asig` int(11) NOT NULL,
+  `coment` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `devolucion`
---
-
-INSERT INTO `devolucion` (`no_dev`, `fec_asig`, `fec_dev`, `ser`, `ced`, `no_asig`) VALUES
-(42, '2017-09-01', '2017-09-01', '5986', 71763169, 2),
-(44, '2017-09-05', '2017-09-01', '1308', 1234989649, 4),
-(45, '2017-09-12', '2017-09-12', '1309', 1234989649, 7),
-(46, '2017-09-14', '2017-09-14', '1308', 1234989649, 2),
-(47, '2017-09-20', '2017-09-20', '2123', 43731786, 2),
-(48, '2017-09-20', '2017-09-26', '2123', 43731786, 3),
-(49, '2017-09-28', '2017-09-28', '2123', 43731786, 2),
-(50, '2017-09-18', '2017-09-28', '1308', 1234989649, 1);
 
 -- --------------------------------------------------------
 
@@ -122,14 +99,6 @@ CREATE TABLE `equipo` (
   `estado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `equipo`
---
-
-INSERT INTO `equipo` (`ser`, `no_tipo`, `no_marca`, `model`, `memo`, `disc_duro`, `procesador`, `sis_operativo`, `type`, `cons_inventario`, `hostname`, `adicional`, `estado`) VALUES
-('1308', 1, 1, 'nkj', 'njk', 'njkn', 'jkn', 'jkn', 'jkn', '4t5amhrs', '2155', '', 'Sin asignacion'),
-('2123', 1, 1, 'hjbhj', 'bhjb', 'hjbhjb', 'hjb', 'hbhj', 'bh', 'hb', 'hj', 'hj', 'Sin asignacion');
-
 -- --------------------------------------------------------
 
 --
@@ -140,14 +109,6 @@ CREATE TABLE `equi_marca` (
   `no_marca` int(11) NOT NULL,
   `nom_marca` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `equi_marca`
---
-
-INSERT INTO `equi_marca` (`no_marca`, `nom_marca`) VALUES
-(1, 'Lenovo'),
-(5, 'ThinkVision');
 
 -- --------------------------------------------------------
 
@@ -160,13 +121,46 @@ CREATE TABLE `equi_tipo` (
   `nom_tipo` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `equi_tipo`
+-- Estructura de tabla para la tabla `permiso`
 --
 
-INSERT INTO `equi_tipo` (`no_tipo`, `nom_tipo`) VALUES
-(1, 'Portatil'),
-(2, 'Desktop');
+CREATE TABLE `permiso` (
+  `no_per` int(11) NOT NULL,
+  `nom_per` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `permiso_rol`
+--
+
+CREATE TABLE `permiso_rol` (
+  `no_per` int(11) NOT NULL,
+  `no_rol` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rol`
+--
+
+CREATE TABLE `rol` (
+  `no_rol` int(11) NOT NULL,
+  `nom_rol` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`no_rol`, `nom_rol`) VALUES
+(1, 'Administrador'),
+(2, 'Soporte');
 
 -- --------------------------------------------------------
 
@@ -178,17 +172,9 @@ CREATE TABLE `users` (
   `user_id` varchar(255) NOT NULL,
   `user_name` varchar(20) NOT NULL,
   `user_lastname` varchar(40) NOT NULL,
-  `user_email` varchar(255) NOT NULL
+  `user_email` varchar(255) NOT NULL,
+  `no_rol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `users`
---
-
-INSERT INTO `users` (`user_id`, `user_name`, `user_lastname`, `user_email`) VALUES
-('USU-20170926-040955', 'Brahian', 'Grajales', 'brahian.verde@hotmail.com'),
-('USU-20170926-100930', 'sdafa', 'sadf', 'begrajales@gmail.com'),
-('USU-20170927-090904', 'brahian', 'grajales', 'brahian@prueba.com');
 
 -- --------------------------------------------------------
 
@@ -197,7 +183,7 @@ INSERT INTO `users` (`user_id`, `user_name`, `user_lastname`, `user_email`) VALU
 --
 
 CREATE TABLE `usuario` (
-  `ced` int(11) NOT NULL,
+  `ced` bigint(11) NOT NULL,
   `no_site` int(11) NOT NULL,
   `no_area` int(11) NOT NULL,
   `no_cargo` int(11) NOT NULL,
@@ -206,14 +192,6 @@ CREATE TABLE `usuario` (
   `tel` bigint(20) DEFAULT NULL,
   `estado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`ced`, `no_site`, `no_area`, `no_cargo`, `vhur`, `nom`, `tel`, `estado`) VALUES
-(43731786, 20, 5, 5, 5487, 'Carlitos', 5644458, 'Sin asignacion'),
-(1234989649, 20, 5, 5, 3780, 'Lorenzo', 3137634842, 'Sin asignacion');
 
 -- --------------------------------------------------------
 
@@ -226,14 +204,6 @@ CREATE TABLE `usu_area` (
   `nom_area` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `usu_area`
---
-
-INSERT INTO `usu_area` (`no_area`, `nom_area`) VALUES
-(5, 'IT'),
-(8, 'Command Center');
-
 -- --------------------------------------------------------
 
 --
@@ -245,14 +215,6 @@ CREATE TABLE `usu_cargo` (
   `nom_cargo` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `usu_cargo`
---
-
-INSERT INTO `usu_cargo` (`no_cargo`, `nom_cargo`) VALUES
-(5, 'Jefe'),
-(8, 'Empleado');
-
 -- --------------------------------------------------------
 
 --
@@ -263,14 +225,6 @@ CREATE TABLE `usu_site` (
   `no_site` int(11) NOT NULL,
   `nom_site` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `usu_site`
---
-
-INSERT INTO `usu_site` (`no_site`, `nom_site`) VALUES
-(20, 'Niquia'),
-(21, 'Aventura');
 
 --
 -- Índices para tablas volcadas
@@ -326,10 +280,30 @@ ALTER TABLE `equi_tipo`
   ADD PRIMARY KEY (`no_tipo`);
 
 --
+-- Indices de la tabla `permiso`
+--
+ALTER TABLE `permiso`
+  ADD PRIMARY KEY (`no_per`);
+
+--
+-- Indices de la tabla `permiso_rol`
+--
+ALTER TABLE `permiso_rol`
+  ADD PRIMARY KEY (`no_per`,`no_rol`),
+  ADD KEY `no_rol` (`no_rol`);
+
+--
+-- Indices de la tabla `rol`
+--
+ALTER TABLE `rol`
+  ADD PRIMARY KEY (`no_rol`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `no_rol` (`no_rol`);
 
 --
 -- Indices de la tabla `usuario`
@@ -371,32 +345,32 @@ ALTER TABLE `asignacion`
 -- AUTO_INCREMENT de la tabla `devolucion`
 --
 ALTER TABLE `devolucion`
-  MODIFY `no_dev` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `no_dev` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `equi_marca`
 --
 ALTER TABLE `equi_marca`
-  MODIFY `no_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `no_marca` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `equi_tipo`
 --
 ALTER TABLE `equi_tipo`
-  MODIFY `no_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `no_tipo` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `usu_area`
 --
 ALTER TABLE `usu_area`
-  MODIFY `no_area` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `no_area` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `usu_cargo`
 --
 ALTER TABLE `usu_cargo`
-  MODIFY `no_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `no_cargo` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `usu_site`
 --
 ALTER TABLE `usu_site`
-  MODIFY `no_site` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `no_site` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Restricciones para tablas volcadas
 --
@@ -428,6 +402,19 @@ ALTER TABLE `asig_dev`
 ALTER TABLE `equipo`
   ADD CONSTRAINT `equipo_ibfk_1` FOREIGN KEY (`no_tipo`) REFERENCES `equi_tipo` (`no_tipo`),
   ADD CONSTRAINT `equipo_ibfk_2` FOREIGN KEY (`no_marca`) REFERENCES `equi_marca` (`no_marca`);
+
+--
+-- Filtros para la tabla `permiso_rol`
+--
+ALTER TABLE `permiso_rol`
+  ADD CONSTRAINT `permiso_rol_ibfk_1` FOREIGN KEY (`no_per`) REFERENCES `permiso` (`no_per`),
+  ADD CONSTRAINT `permiso_rol_ibfk_2` FOREIGN KEY (`no_rol`) REFERENCES `rol` (`no_rol`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`no_rol`) REFERENCES `rol` (`no_rol`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuario`
